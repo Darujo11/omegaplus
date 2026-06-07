@@ -179,6 +179,7 @@ export default async function AreaDetalhe({ params }: Props) {
                   alt={area.title}
                   fill
                   sizes="200px"
+                  priority
                   style={{ objectFit: "cover" }}
                 />
               </div>
