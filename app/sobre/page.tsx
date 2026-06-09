@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CheckCircle2, Target, Eye, Shield, GraduationCap, User } from "lucide-react";
+import { CheckCircle2, Target, Eye, Shield, GraduationCap, User, Scale, Users } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import { SITE } from "@/lib/site-data";
 
@@ -202,7 +202,7 @@ export default function SobrePage() {
               marginBottom: "14px",
             }}
           >
-            Equipe técnica
+            Equipe
           </span>
           <h2
             className="display-heading"
@@ -213,7 +213,7 @@ export default function SobrePage() {
               letterSpacing: "-0.04em",
             }}
           >
-            Responsabilidade técnica
+            Equipe técnica e administrativa
           </h2>
         </AnimatedSection>
 
@@ -277,7 +277,7 @@ export default function SobrePage() {
                   marginBottom: "8px",
                 }}
               >
-                Responsável Técnico
+                {SITE.team.engineer.role}
               </span>
               <h3
                 className="display-heading"
@@ -341,7 +341,7 @@ export default function SobrePage() {
             </div>
           </AnimatedSection>
 
-          {/* Diretora */}
+          {/* Chefe Administradora */}
           <AnimatedSection delay={0.1}>
             <div
               style={{
@@ -349,6 +349,7 @@ export default function SobrePage() {
                 borderRadius: "16px",
                 background: "#0d1526",
                 border: "1px solid #1a2d4a",
+                height: "100%",
               }}
             >
               <div
@@ -380,7 +381,7 @@ export default function SobrePage() {
                   marginBottom: "8px",
                 }}
               >
-                Direção
+                {SITE.team.director.role}
               </span>
               <h3
                 className="display-heading"
@@ -395,11 +396,149 @@ export default function SobrePage() {
                 {SITE.team.director.name}
               </h3>
               <p style={{ fontSize: "14px", color: "#6b7d96", marginTop: "8px" }}>
-                {SITE.team.director.role}
+                {SITE.team.director.degree}
+              </p>
+            </div>
+          </AnimatedSection>
+
+          {/* Advogado */}
+          <AnimatedSection delay={0.2}>
+            <div
+              style={{
+                padding: "36px",
+                borderRadius: "16px",
+                background: "#0d1526",
+                border: "1px solid #1a2d4a",
+                height: "100%",
+              }}
+            >
+              <div
+                style={{
+                  width: "52px",
+                  height: "52px",
+                  borderRadius: "12px",
+                  background: "rgba(26, 127, 193, 0.1)",
+                  border: "1px solid rgba(26, 127, 193, 0.2)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#1a7fc1",
+                  marginBottom: "20px",
+                }}
+              >
+                <Scale size={24} />
+              </div>
+
+              <span
+                style={{
+                  fontFamily: "var(--font-code)",
+                  fontSize: "10px",
+                  fontWeight: "500",
+                  color: "#3d9fd8",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  display: "block",
+                  marginBottom: "8px",
+                }}
+              >
+                Jurídico
+              </span>
+              <h3
+                className="display-heading"
+                style={{
+                  fontSize: "22px",
+                  fontWeight: "700",
+                  color: "#e8edf5",
+                  letterSpacing: "-0.02em",
+                  marginBottom: "4px",
+                }}
+              >
+                {SITE.team.lawyer.name}
+              </h3>
+              <p style={{ fontSize: "14px", color: "#6b7d96", marginTop: "8px" }}>
+                {SITE.team.lawyer.role}
               </p>
             </div>
           </AnimatedSection>
         </div>
+
+        {/* Equipe técnica direta e indireta */}
+        <AnimatedSection delay={0.1} style={{ marginTop: "20px" }}>
+          <div
+            style={{
+              padding: "36px",
+              borderRadius: "16px",
+              background: "#0d1526",
+              border: "1px solid #1a2d4a",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "24px" }}>
+              <div
+                style={{
+                  width: "44px",
+                  height: "44px",
+                  borderRadius: "11px",
+                  background: "rgba(26, 127, 193, 0.1)",
+                  border: "1px solid rgba(26, 127, 193, 0.2)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#1a7fc1",
+                  flexShrink: 0,
+                }}
+              >
+                <Users size={22} />
+              </div>
+              <span
+                style={{
+                  fontFamily: "var(--font-code)",
+                  fontSize: "11px",
+                  fontWeight: "500",
+                  color: "#3d9fd8",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Equipe técnica direta e indireta
+              </span>
+            </div>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+                gap: "12px",
+              }}
+            >
+              {SITE.team.extended.map((role) => (
+                <div
+                  key={role}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "12px",
+                    padding: "14px 18px",
+                    borderRadius: "10px",
+                    background: "#080e1a",
+                    border: "1px solid #1a2d4a",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "5px",
+                      height: "5px",
+                      borderRadius: "50%",
+                      background: "#1a7fc1",
+                      flexShrink: 0,
+                      opacity: 0.7,
+                    }}
+                  />
+                  <span style={{ fontSize: "14px", color: "#8a9ab0", lineHeight: "1.4" }}>{role}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </AnimatedSection>
       </section>
 
       {/* Quality policy */}

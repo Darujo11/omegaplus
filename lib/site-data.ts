@@ -23,6 +23,7 @@ export const SITE = {
   team: {
     engineer: {
       name: "Maxuel Bernardes Donato",
+      role: "Diretor Técnico / Administrativo",
       crea: "2009101529",
       titles: [
         "Engenheiro Civil",
@@ -37,8 +38,21 @@ export const SITE = {
     },
     director: {
       name: "Lecyana R. Silva Donato",
-      role: "Diretora Chefe",
+      role: "Chefe Administradora",
+      degree: "Ciências Contábeis",
     },
+    lawyer: {
+      name: "Israel B. Donato",
+      role: "Advogado",
+    },
+    extended: [
+      "Engenheiros Civis",
+      "Engenheiros Sanitaristas e Ambientais",
+      "Engenheiro Químico",
+      "Engenheiro Eletricista",
+      "Engenheiro Mecânico",
+      "Geólogo",
+    ],
   },
 } as const;
 

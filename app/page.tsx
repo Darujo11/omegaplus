@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -38,6 +39,22 @@ const iconMap: Record<string, React.ReactNode> = {
 
 const tickerItems = AREAS.map((a) => a.title);
 
+const LOGOS = [
+  "/aprovadosporquemusa/1.jpg",
+  "/aprovadosporquemusa/realiza.jpg",
+  "/aprovadosporquemusa/Foto de Fabio Ventura.jpg",
+  "/aprovadosporquemusa/Foto de Fabio Ventura(2).jpg",
+  "/aprovadosporquemusa/Foto de Fabio Ventura(3).jpg",
+  "/aprovadosporquemusa/Foto de Fabio Ventura(4).jpg",
+  "/aprovadosporquemusa/Foto de Fabio Ventura(5).jpg",
+  "/aprovadosporquemusa/Foto de Fabio Ventura(6).jpg",
+  "/aprovadosporquemusa/Foto de Fabio Ventura(7).jpg",
+  "/aprovadosporquemusa/Foto de Fabio Ventura(9).jpg",
+  "/aprovadosporquemusa/Foto de Fabio Ventura(10).jpg",
+  "/aprovadosporquemusa/Foto de Fabio Ventura(11).jpg",
+  "/aprovadosporquemusa/prefeitura carapebus.jpg",
+];
+
 export default function HomePage() {
   const featuredAreas = AREAS.slice(0, 4);
 
@@ -45,31 +62,94 @@ export default function HomePage() {
     <>
       {/* ── HERO ── */}
       <section
-        className="blueprint-bg"
         style={{
           minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "120px 24px 80px",
           position: "relative",
           overflow: "hidden",
+          display: "flex",
+          alignItems: "center",
         }}
       >
-        {/* Radial glow */}
+        {/* Video background */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center",
+          }}
+        >
+          <source src="/video_hero/video_veo_3.1_-_fast_1781042397303.mp4" type="video/mp4" />
+        </video>
+
+        {/* Blueprint grid on top of video */}
+        <div
+          className="blueprint-bg"
+          aria-hidden
+          style={{ position: "absolute", inset: 0, zIndex: 1, opacity: 0.28 }}
+        />
+
+        {/* Primary gradient: escurece à esquerda, abre o vídeo à direita */}
         <div
           aria-hidden
           style={{
             position: "absolute",
-            top: "35%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "900px",
-            height: "700px",
+            inset: 0,
+            zIndex: 2,
             background:
-              "radial-gradient(ellipse at center, rgba(26, 127, 193, 0.1) 0%, transparent 68%)",
+              "linear-gradient(100deg, rgba(8,14,26,0.97) 0%, rgba(8,14,26,0.93) 32%, rgba(8,14,26,0.55) 58%, rgba(8,14,26,0.08) 100%)",
+          }}
+        />
+
+        {/* Top vignette — blende com o header */}
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: "220px",
+            zIndex: 3,
+            background: "linear-gradient(to bottom, rgba(8,14,26,0.75) 0%, transparent 100%)",
             pointerEvents: "none",
+          }}
+        />
+
+        {/* Bottom vignette — ancora o conteúdo na página */}
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "260px",
+            zIndex: 3,
+            background: "linear-gradient(to top, rgba(8,14,26,0.95) 0%, transparent 100%)",
+            pointerEvents: "none",
+          }}
+        />
+
+        {/* Radial blue glow — reforça a identidade de marca no lado esquerdo */}
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "20%",
+            transform: "translate(-50%, -50%)",
+            width: "800px",
+            height: "600px",
+            background: "radial-gradient(ellipse at center, rgba(26,127,193,0.1) 0%, transparent 68%)",
+            pointerEvents: "none",
+            zIndex: 3,
           }}
         />
 
@@ -78,317 +158,317 @@ export default function HomePage() {
           aria-hidden
           style={{
             position: "absolute",
-            right: "-40px",
-            bottom: "5%",
+            left: "-16px",
+            bottom: "6%",
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(200px, 30vw, 380px)",
+            fontSize: "clamp(180px, 26vw, 360px)",
             fontWeight: "700",
-            color: "rgba(26, 127, 193, 0.03)",
+            color: "rgba(26,127,193,0.04)",
             lineHeight: 1,
             pointerEvents: "none",
             userSelect: "none",
             letterSpacing: "-0.05em",
+            zIndex: 3,
           }}
         >
           Ω
         </div>
 
-        {/* Coordinates — top right */}
+        {/* Coordinates — canto inferior direito sobre o vídeo */}
         <div
           aria-hidden
           style={{
             position: "absolute",
-            top: "88px",
+            bottom: "32px",
             right: "32px",
             fontFamily: "var(--font-code)",
-            fontSize: "11px",
-            color: "rgba(61, 159, 216, 0.35)",
-            letterSpacing: "0.08em",
-            lineHeight: "1.8",
+            fontSize: "10px",
+            color: "rgba(61,159,216,0.38)",
+            letterSpacing: "0.09em",
+            lineHeight: "1.9",
             textAlign: "right",
             pointerEvents: "none",
+            zIndex: 4,
           }}
         >
-          21°45&prime;S 41°19&prime;W
+          21°45′S 41°19′W
           <br />
           CAMPOS — RJ
         </div>
 
         {/* Content */}
-        <div style={{ maxWidth: "920px", width: "100%", textAlign: "center", position: "relative" }}>
-          {/* Badge */}
-          <AnimatedSection delay={0}>
-            <div
-              className="glow-badge"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                padding: "6px 14px",
-                borderRadius: "100px",
-                border: "1px solid rgba(26, 127, 193, 0.28)",
-                background: "rgba(26, 127, 193, 0.07)",
-                marginBottom: "36px",
-              }}
-            >
-              <div
+        <div
+          style={{
+            position: "relative",
+            zIndex: 4,
+            maxWidth: "1240px",
+            width: "100%",
+            margin: "0 auto",
+            padding: "120px 32px 96px",
+          }}
+        >
+          {/* Text — coluna esquerda, ~metade da largura */}
+          <div style={{ maxWidth: "600px" }}>
+            {/* Heading */}
+            <AnimatedSection delay={0.1}>
+              <h1
+                className="display-heading"
                 style={{
-                  width: "6px",
-                  height: "6px",
-                  borderRadius: "50%",
-                  background: "#1a7fc1",
-                  boxShadow: "0 0 8px rgba(26, 127, 193, 0.8)",
-                }}
-              />
-              <span
-                style={{
-                  fontFamily: "var(--font-code)",
-                  fontSize: "11px",
-                  fontWeight: "500",
-                  color: "#3d9fd8",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Campos dos Goytacazes, Rio de Janeiro
-              </span>
-            </div>
-          </AnimatedSection>
-
-          {/* Heading */}
-          <AnimatedSection delay={0.1}>
-            <h1
-              className="display-heading"
-              style={{
-                fontSize: "var(--text-5xl)",
-                fontWeight: "700",
-                color: "#e8edf5",
-                lineHeight: "1.0",
-                letterSpacing: "-0.04em",
-                marginBottom: "28px",
-              }}
-            >
-              Engenharia de{" "}
-              <span
-                style={{
-                  background: "linear-gradient(135deg, #3d9fd8 0%, #1a7fc1 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                excelência,
-              </span>
-              <br />
-              resultados que perduram.
-            </h1>
-          </AnimatedSection>
-
-          <AnimatedSection delay={0.2}>
-            <p
-              style={{
-                fontSize: "17px",
-                color: "#6b7d96",
-                lineHeight: "1.75",
-                maxWidth: "64ch",
-                margin: "0 auto 48px",
-              }}
-            >
-              Soluções integradas em engenharia para obras públicas, privadas, industriais e ambientais.
-            </p>
-          </AnimatedSection>
-
-          <AnimatedSection delay={0.3}>
-            <div style={{ display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap" }}>
-              <Link
-                href="/contato"
-                className="btn-ghost-hover"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  padding: "14px 28px",
-                  borderRadius: "10px",
-                  fontSize: "14px",
+                  fontSize: "var(--text-5xl)",
                   fontWeight: "700",
-                  textDecoration: "none",
-                  background: "linear-gradient(135deg, #1a7fc1 0%, #0d5a8a 100%)",
-                  color: "#fff",
-                  boxShadow: "0 8px 32px rgba(26, 127, 193, 0.3), inset 0 1px 0 rgba(255,255,255,0.1)",
-                  letterSpacing: "0.01em",
+                  color: "#e8edf5",
+                  lineHeight: "1.0",
+                  letterSpacing: "-0.04em",
+                  marginBottom: "28px",
                 }}
               >
-                Solicitar Orçamento <ArrowRight size={15} />
-              </Link>
-              <Link
-                href="/areas-de-atuacao"
-                className="btn-ghost-hover"
+                Engenharia de{" "}
+                <span
+                  style={{
+                    background: "linear-gradient(135deg, #3d9fd8 0%, #1a7fc1 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }}
+                >
+                  excelência,
+                </span>
+                <br />
+                resultados que perduram.
+              </h1>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.2}>
+              <p
                 style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  padding: "14px 28px",
-                  borderRadius: "10px",
-                  fontSize: "14px",
-                  fontWeight: "600",
-                  textDecoration: "none",
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  color: "#8a9ab0",
+                  fontSize: "17px",
+                  color: "#6b7d96",
+                  lineHeight: "1.75",
+                  maxWidth: "50ch",
+                  marginBottom: "48px",
                 }}
               >
-                Áreas de Atuação <ChevronRight size={15} />
-              </Link>
+                Soluções integradas em engenharia para obras públicas, privadas, industriais e ambientais.
+              </p>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.3}>
+              <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
+                <Link
+                  href="/contato"
+                  className="btn-ghost-hover"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    padding: "14px 28px",
+                    borderRadius: "10px",
+                    fontSize: "14px",
+                    fontWeight: "700",
+                    textDecoration: "none",
+                    background: "linear-gradient(135deg, #1a7fc1 0%, #0d5a8a 100%)",
+                    color: "#fff",
+                    boxShadow: "0 8px 32px rgba(26,127,193,0.3), inset 0 1px 0 rgba(255,255,255,0.1)",
+                    letterSpacing: "0.01em",
+                  }}
+                >
+                  Solicitar Orçamento <ArrowRight size={15} />
+                </Link>
+                <Link
+                  href="/areas-de-atuacao"
+                  className="btn-ghost-hover"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    padding: "14px 28px",
+                    borderRadius: "10px",
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    textDecoration: "none",
+                    background: "rgba(255,255,255,0.05)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    color: "#8a9ab0",
+                  }}
+                >
+                  Áreas de Atuação <ChevronRight size={15} />
+                </Link>
+              </div>
+            </AnimatedSection>
+          </div>
+
+          {/* Stats — full width, ancorado abaixo do texto */}
+          <AnimatedSection delay={0.5} style={{ marginTop: "80px" }}>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+                gap: "0",
+                background: "rgba(26,45,74,0.7)",
+                border: "1px solid rgba(26,45,74,0.9)",
+                borderRadius: "16px",
+                overflow: "hidden",
+                backdropFilter: "blur(16px)",
+                WebkitBackdropFilter: "blur(16px)",
+              }}
+            >
+              {STATS.map((stat, i) => (
+                <div
+                  key={stat.label}
+                  style={{
+                    padding: "28px 20px",
+                    background: "rgba(13,21,38,0.8)",
+                    textAlign: "center",
+                    borderRight: i < STATS.length - 1 ? "1px solid rgba(26,45,74,0.8)" : "none",
+                    position: "relative",
+                  }}
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      width: "32px",
+                      height: "2px",
+                      background: "linear-gradient(90deg, transparent, #1a7fc1, transparent)",
+                    }}
+                  />
+                  <div
+                    className="stat-value"
+                    style={{
+                      fontSize: "clamp(24px, 3vw, 36px)",
+                      fontWeight: "500",
+                      color: "#3d9fd8",
+                      marginBottom: "6px",
+                      letterSpacing: "-0.03em",
+                    }}
+                  >
+                    {stat.value}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-code)",
+                      fontSize: "10px",
+                      color: "#3d5070",
+                      fontWeight: "400",
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
             </div>
           </AnimatedSection>
         </div>
+      </section>
 
-        {/* Stats */}
-        <AnimatedSection
-          delay={0.5}
-          style={{
-            maxWidth: "900px",
-            width: "100%",
-            marginTop: "80px",
-          }}
-        >
+      {/* ── APROVADO POR QUEM USA ── */}
+      <section
+        style={{
+          padding: "88px 0",
+          background: "#060c18",
+          borderBottom: "1px solid #1a2d4a",
+          overflow: "hidden",
+        }}
+      >
+        {/* Header */}
+        <AnimatedSection>
+          <div style={{ textAlign: "center", padding: "0 24px", marginBottom: "56px" }}>
+            <div
+              className="accent-line"
+              style={{ margin: "0 auto 20px" }}
+            />
+            <h2
+              className="display-heading"
+              style={{
+                fontSize: "var(--text-2xl)",
+                fontWeight: "700",
+                color: "#e8edf5",
+                letterSpacing: "-0.04em",
+                marginBottom: "10px",
+              }}
+            >
+              Aprovado por quem usa
+            </h2>
+            <p
+              style={{
+                fontFamily: "var(--font-code)",
+                fontSize: "11px",
+                color: "#3d5070",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+              }}
+            >
+              Clientes e parceiros que confiam na Omega
+            </p>
+          </div>
+        </AnimatedSection>
+
+        {/* Marquee */}
+        <div style={{ position: "relative" }}>
+          {/* Left fade */}
           <div
+            aria-hidden
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-              gap: "0",
-              background: "#1a2d4a",
-              border: "1px solid #1a2d4a",
-              borderRadius: "16px",
-              overflow: "hidden",
+              position: "absolute",
+              left: 0,
+              top: 0,
+              bottom: 0,
+              width: "160px",
+              background: "linear-gradient(90deg, #060c18, transparent)",
+              zIndex: 1,
+              pointerEvents: "none",
             }}
-          >
-            {STATS.map((stat, i) => (
+          />
+          {/* Right fade */}
+          <div
+            aria-hidden
+            style={{
+              position: "absolute",
+              right: 0,
+              top: 0,
+              bottom: 0,
+              width: "160px",
+              background: "linear-gradient(270deg, #060c18, transparent)",
+              zIndex: 1,
+              pointerEvents: "none",
+            }}
+          />
+
+          <div className="marquee-track logo-card-track">
+            {[...LOGOS, ...LOGOS].map((logo, i) => (
               <div
-                key={stat.label}
+                key={i}
+                className="logo-card"
                 style={{
-                  padding: "28px 20px",
-                  background: "#0d1526",
-                  textAlign: "center",
-                  borderRight: i < STATS.length - 1 ? "1px solid #1a2d4a" : "none",
+                  width: "210px",
+                  height: "100px",
+                  flexShrink: 0,
+                  marginRight: "20px",
+                  borderRadius: "12px",
+                  overflow: "hidden",
                   position: "relative",
+                  background: "rgba(255,255,255,0.94)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.4)",
+                  opacity: 0.82,
                 }}
               >
-                {/* Top accent line */}
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    width: "32px",
-                    height: "2px",
-                    background: "linear-gradient(90deg, transparent, #1a7fc1, transparent)",
-                  }}
+                <Image
+                  src={logo}
+                  alt="Cliente Omega Engenharia"
+                  fill
+                  sizes="210px"
+                  style={{ objectFit: "contain", padding: "16px 22px" }}
                 />
-                <div
-                  className="stat-value"
-                  style={{
-                    fontSize: "clamp(24px, 3vw, 36px)",
-                    fontWeight: "500",
-                    color: "#3d9fd8",
-                    marginBottom: "6px",
-                    letterSpacing: "-0.03em",
-                  }}
-                >
-                  {stat.value}
-                </div>
-                <div
-                  style={{
-                    fontFamily: "var(--font-code)",
-                    fontSize: "10px",
-                    color: "#3d5070",
-                    fontWeight: "400",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {stat.label}
-                </div>
               </div>
             ))}
           </div>
-        </AnimatedSection>
-      </section>
-
-      {/* ── TICKER ── */}
-      <div
-        style={{
-          borderTop: "1px solid #1a2d4a",
-          borderBottom: "1px solid #1a2d4a",
-          background: "#060c18",
-          overflow: "hidden",
-          padding: "13px 0",
-          position: "relative",
-        }}
-      >
-        {/* Left fade */}
-        <div
-          aria-hidden
-          style={{
-            position: "absolute",
-            left: 0,
-            top: 0,
-            bottom: 0,
-            width: "80px",
-            background: "linear-gradient(90deg, #060c18, transparent)",
-            zIndex: 1,
-            pointerEvents: "none",
-          }}
-        />
-        {/* Right fade */}
-        <div
-          aria-hidden
-          style={{
-            position: "absolute",
-            right: 0,
-            top: 0,
-            bottom: 0,
-            width: "80px",
-            background: "linear-gradient(270deg, #060c18, transparent)",
-            zIndex: 1,
-            pointerEvents: "none",
-          }}
-        />
-
-        <div className="marquee-track">
-          {[...tickerItems, ...tickerItems].map((item, i) => (
-            <span
-              key={i}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "20px",
-                paddingRight: "40px",
-                fontFamily: "var(--font-code)",
-                fontSize: "11px",
-                fontWeight: "500",
-                color: "#4e667f",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                whiteSpace: "nowrap",
-              }}
-            >
-              {item}
-              <span
-                style={{
-                  display: "inline-block",
-                  width: "3px",
-                  height: "3px",
-                  borderRadius: "50%",
-                  background: "#1a7fc1",
-                  opacity: 0.6,
-                }}
-              />
-            </span>
-          ))}
         </div>
-      </div>
+      </section>
 
       {/* ── AREAS PREVIEW ── */}
       <section style={{ padding: "96px 24px", maxWidth: "1200px", margin: "0 auto", position: "relative" }}>
@@ -533,6 +613,80 @@ export default function HomePage() {
           </Link>
         </AnimatedSection>
       </section>
+
+      {/* ── TICKER ── */}
+      <div
+        style={{
+          borderTop: "1px solid #1a2d4a",
+          borderBottom: "1px solid #1a2d4a",
+          background: "#060c18",
+          overflow: "hidden",
+          padding: "13px 0",
+          position: "relative",
+        }}
+      >
+        {/* Left fade */}
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            bottom: 0,
+            width: "80px",
+            background: "linear-gradient(90deg, #060c18, transparent)",
+            zIndex: 1,
+            pointerEvents: "none",
+          }}
+        />
+        {/* Right fade */}
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            right: 0,
+            top: 0,
+            bottom: 0,
+            width: "80px",
+            background: "linear-gradient(270deg, #060c18, transparent)",
+            zIndex: 1,
+            pointerEvents: "none",
+          }}
+        />
+
+        <div className="marquee-track">
+          {[...tickerItems, ...tickerItems].map((item, i) => (
+            <span
+              key={i}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "20px",
+                paddingRight: "40px",
+                fontFamily: "var(--font-code)",
+                fontSize: "11px",
+                fontWeight: "500",
+                color: "#4e667f",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {item}
+              <span
+                style={{
+                  display: "inline-block",
+                  width: "3px",
+                  height: "3px",
+                  borderRadius: "50%",
+                  background: "#1a7fc1",
+                  opacity: 0.6,
+                }}
+              />
+            </span>
+          ))}
+        </div>
+      </div>
 
       {/* ── CTA ── */}
       <section
