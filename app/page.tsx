@@ -17,7 +17,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
-import { SITE, STATS, AREAS } from "@/lib/site-data";
+import { SITE, AREAS } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "Omega CSA Engenharia — Campos dos Goytacazes, RJ",
@@ -296,72 +296,6 @@ export default function HomePage() {
               </div>
             </AnimatedSection>
           </div>
-
-          {/* Stats — full width, ancorado abaixo do texto */}
-          <AnimatedSection delay={0.5} style={{ marginTop: "80px" }}>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-                gap: "0",
-                background: "rgba(26,45,74,0.7)",
-                border: "1px solid rgba(26,45,74,0.9)",
-                borderRadius: "16px",
-                overflow: "hidden",
-                backdropFilter: "blur(16px)",
-                WebkitBackdropFilter: "blur(16px)",
-              }}
-            >
-              {STATS.map((stat, i) => (
-                <div
-                  key={stat.label}
-                  style={{
-                    padding: "28px 20px",
-                    background: "rgba(13,21,38,0.8)",
-                    textAlign: "center",
-                    borderRight: i < STATS.length - 1 ? "1px solid rgba(26,45,74,0.8)" : "none",
-                    position: "relative",
-                  }}
-                >
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      width: "32px",
-                      height: "2px",
-                      background: "linear-gradient(90deg, transparent, #1a7fc1, transparent)",
-                    }}
-                  />
-                  <div
-                    className="stat-value"
-                    style={{
-                      fontSize: "clamp(24px, 3vw, 36px)",
-                      fontWeight: "500",
-                      color: "#3d9fd8",
-                      marginBottom: "6px",
-                      letterSpacing: "-0.03em",
-                    }}
-                  >
-                    {stat.value}
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "var(--font-code)",
-                      fontSize: "10px",
-                      color: "#3d5070",
-                      fontWeight: "400",
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </AnimatedSection>
         </div>
       </section>
 
