@@ -231,10 +231,10 @@ export default function HomePage() {
                     backgroundClip: "text",
                   }}
                 >
-                  excelência,
+                  confiança,
                 </span>
                 <br />
-                resultados que perduram.
+                parceria que dura.
               </h1>
             </AnimatedSection>
 
