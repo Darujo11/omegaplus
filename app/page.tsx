@@ -1,40 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowRight,
-  Building2,
-  Layers,
-  Droplets,
-  Leaf,
-  ShieldCheck,
-  Mountain,
-  Settings,
-  Map,
-  Search,
-  Zap,
-  Cpu,
-  ChevronRight,
-} from "lucide-react";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
+import AnimatedStats from "@/components/AnimatedStats";
+import AreasSection from "@/components/AreasSection";
 import { SITE, AREAS } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "Omega CSA Engenharia — Campos dos Goytacazes, RJ",
-};
-
-const iconMap: Record<string, React.ReactNode> = {
-  building: <Building2 size={20} />,
-  layers: <Layers size={20} />,
-  droplets: <Droplets size={20} />,
-  leaf: <Leaf size={20} />,
-  shield: <ShieldCheck size={20} />,
-  mountain: <Mountain size={20} />,
-  settings: <Settings size={20} />,
-  map: <Map size={20} />,
-  search: <Search size={20} />,
-  zap: <Zap size={20} />,
-  cpu: <Cpu size={20} />,
 };
 
 const tickerItems = AREAS.map((a) => a.title);
@@ -56,8 +30,6 @@ const LOGOS = [
 ];
 
 export default function HomePage() {
-  const featuredAreas = AREAS.slice(0, 4);
-
   return (
     <>
       {/* ── HERO ── */}
@@ -76,13 +48,14 @@ export default function HomePage() {
           muted
           loop
           playsInline
+          preload="metadata"
+          className="hero-video"
           style={{
             position: "absolute",
             inset: 0,
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            objectPosition: "center",
           }}
         >
           <source src="/video_hero/omega.mp4" type="video/mp4" />
@@ -177,6 +150,7 @@ export default function HomePage() {
         {/* Coordinates — canto inferior direito sobre o vídeo */}
         <div
           aria-hidden
+          className="hero-coords"
           style={{
             position: "absolute",
             bottom: "32px",
@@ -204,7 +178,7 @@ export default function HomePage() {
             maxWidth: "1240px",
             width: "100%",
             margin: "0 auto",
-            padding: "120px 32px 96px",
+            padding: "clamp(100px,18vh,120px) clamp(16px,4vw,32px) clamp(60px,10vh,96px)",
           }}
         >
           {/* Text — coluna esquerda, ~metade da largura */}
@@ -253,7 +227,7 @@ export default function HomePage() {
             </AnimatedSection>
 
             <AnimatedSection delay={0.3}>
-              <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
+              <div className="hero-actions" style={{ gap: "14px" }}>
                 <Link
                   href="/contato"
                   className="btn-ghost-hover"
@@ -298,6 +272,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── STATS ── */}
+      <AnimatedStats />
 
       {/* ── APROVADO POR QUEM USA ── */}
       <section
@@ -346,12 +323,12 @@ export default function HomePage() {
           {/* Left fade */}
           <div
             aria-hidden
+            className="marquee-fade-l"
             style={{
               position: "absolute",
               left: 0,
               top: 0,
               bottom: 0,
-              width: "160px",
               background: "linear-gradient(90deg, #060c18, transparent)",
               zIndex: 1,
               pointerEvents: "none",
@@ -360,12 +337,12 @@ export default function HomePage() {
           {/* Right fade */}
           <div
             aria-hidden
+            className="marquee-fade-r"
             style={{
               position: "absolute",
               right: 0,
               top: 0,
               bottom: 0,
-              width: "160px",
               background: "linear-gradient(270deg, #060c18, transparent)",
               zIndex: 1,
               pointerEvents: "none",
@@ -378,8 +355,8 @@ export default function HomePage() {
                 key={i}
                 className="logo-card"
                 style={{
-                  width: "210px",
-                  height: "100px",
+                  width: "clamp(150px, 38vw, 210px)",
+                  height: "clamp(72px, 18vw, 100px)",
                   flexShrink: 0,
                   marginRight: "20px",
                   borderRadius: "12px",
@@ -405,148 +382,7 @@ export default function HomePage() {
       </section>
 
       {/* ── AREAS PREVIEW ── */}
-      <section style={{ padding: "96px 24px", maxWidth: "1200px", margin: "0 auto", position: "relative" }}>
-        {/* Section watermark */}
-        <div className="section-watermark">01</div>
-
-        <AnimatedSection>
-          <div style={{ marginBottom: "56px" }}>
-            <div className="accent-line" />
-            <span
-              style={{
-                fontFamily: "var(--font-code)",
-                fontSize: "11px",
-                fontWeight: "500",
-                color: "#1a7fc1",
-                letterSpacing: "0.15em",
-                textTransform: "uppercase",
-                display: "block",
-                marginBottom: "14px",
-              }}
-            >
-              Áreas de Atuação
-            </span>
-            <h2
-              className="display-heading"
-              style={{
-                fontSize: "var(--text-3xl)",
-                fontWeight: "700",
-                color: "#e8edf5",
-                letterSpacing: "-0.04em",
-                lineHeight: "1.1",
-                marginBottom: "16px",
-              }}
-            >
-              Soluções técnicas
-              <br />
-              para cada desafio
-            </h2>
-            <p style={{ fontSize: "16px", color: "#6b7d96", maxWidth: "52ch", lineHeight: "1.7" }}>
-              Atuamos em 11 especialidades — da concepção ao acompanhamento técnico final.
-            </p>
-          </div>
-        </AnimatedSection>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-            gap: "16px",
-          }}
-        >
-          {featuredAreas.map((area, i) => (
-            <AnimatedSection key={area.slug} delay={i * 0.08}>
-              <Link
-                href={`/areas-de-atuacao/${area.slug}`}
-                style={{ textDecoration: "none", display: "block", height: "100%" }}
-              >
-                <div
-                  className="card-hover"
-                  style={{
-                    padding: "28px",
-                    borderRadius: "14px",
-                    background: "#0d1526",
-                    border: "1px solid #1a2d4a",
-                    height: "100%",
-                    cursor: "pointer",
-                    position: "relative",
-                    overflow: "hidden",
-                  }}
-                >
-                  {/* Corner number */}
-                  <span
-                    aria-hidden
-                    style={{
-                      position: "absolute",
-                      top: "16px",
-                      right: "18px",
-                      fontFamily: "var(--font-code)",
-                      fontSize: "10px",
-                      color: "rgba(26, 127, 193, 0.25)",
-                      letterSpacing: "0.06em",
-                    }}
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-
-                  <div
-                    style={{
-                      width: "44px",
-                      height: "44px",
-                      borderRadius: "10px",
-                      background: "rgba(26, 127, 193, 0.1)",
-                      border: "1px solid rgba(26, 127, 193, 0.18)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: "#1a7fc1",
-                      marginBottom: "18px",
-                    }}
-                  >
-                    {iconMap[area.icon]}
-                  </div>
-                  <h3
-                    className="display-heading"
-                    style={{
-                      fontSize: "16px",
-                      fontWeight: "700",
-                      color: "#e8edf5",
-                      marginBottom: "10px",
-                      letterSpacing: "-0.02em",
-                      lineHeight: "1.3",
-                    }}
-                  >
-                    {area.title}
-                  </h3>
-                  <p style={{ fontSize: "13px", color: "#6b7d96", lineHeight: "1.65" }}>
-                    {area.shortDesc}
-                  </p>
-                </div>
-              </Link>
-            </AnimatedSection>
-          ))}
-        </div>
-
-        <AnimatedSection delay={0.35} style={{ marginTop: "36px" }}>
-          <Link
-            href="/areas-de-atuacao"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              fontFamily: "var(--font-code)",
-              fontSize: "12px",
-              fontWeight: "500",
-              color: "#3d9fd8",
-              textDecoration: "none",
-              letterSpacing: "0.06em",
-              textTransform: "uppercase",
-            }}
-          >
-            Ver todas as 11 áreas <ChevronRight size={14} />
-          </Link>
-        </AnimatedSection>
-      </section>
+      <AreasSection />
 
       {/* ── TICKER ── */}
       <div
@@ -658,8 +494,8 @@ export default function HomePage() {
               maxWidth: "1200px",
               margin: "0 auto",
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
-              gap: "64px",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(340px, 100%), 1fr))",
+              gap: "clamp(28px, 5vw, 64px)",
               alignItems: "center",
               position: "relative",
             }}

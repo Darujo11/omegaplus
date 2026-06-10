@@ -3,6 +3,7 @@ import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ScrollProgress from "@/components/ScrollProgress";
 
 // IBM Plex — superfamília criada pela IBM para uma empresa de tecnologia/engenharia.
 // Sans para títulos + corpo; Mono (mesma família) para labels técnicos, specs e números.
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR" className={`${plexSans.variable} ${plexMono.variable}`}>
       <body style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}>
+        <ScrollProgress />
         <Header />
         <main>{children}</main>
         <Footer />

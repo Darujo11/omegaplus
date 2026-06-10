@@ -118,6 +118,44 @@ export default function ClientesPage() {
         </AnimatedSection>
       </section>
 
+      {/* Video destaque */}
+      <section
+        style={{
+          padding: "0 24px 68px",
+          maxWidth: "1200px",
+          margin: "0 auto",
+        }}
+      >
+        <AnimatedSection>
+          <div
+            style={{
+              borderRadius: "16px",
+              overflow: "hidden",
+              border: "1px solid #1a2d4a",
+              background: "#080e1a",
+              boxShadow: "0 20px 48px rgba(0,0,0,0.35)",
+            }}
+          >
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              style={{
+                width: "100%",
+                height: "clamp(260px, 44vw, 520px)",
+                display: "block",
+                objectFit: "cover",
+                objectPosition: "center",
+              }}
+            >
+              <source src="/Clientes/cards.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </AnimatedSection>
+      </section>
+
       {/* Who we serve */}
       <section
         style={{

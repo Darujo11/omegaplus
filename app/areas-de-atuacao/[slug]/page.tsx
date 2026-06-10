@@ -79,10 +79,10 @@ export default async function AreaDetalhe({ params }: Props) {
       {/* Header */}
       <section
         style={{
-          paddingTop: "140px",
+          paddingTop: "clamp(100px, 18vh, 140px)",
           paddingBottom: "64px",
-          paddingLeft: "24px",
-          paddingRight: "24px",
+          paddingLeft: "clamp(16px, 4vw, 24px)",
+          paddingRight: "clamp(16px, 4vw, 24px)",
           maxWidth: "1200px",
           margin: "0 auto",
         }}
@@ -140,7 +140,7 @@ export default async function AreaDetalhe({ params }: Props) {
                     fontSize: "var(--text-3xl)",
                     fontWeight: "700",
                     color: "#e8edf5",
-                    letterSpacing: "-1.5px",
+                    letterSpacing: "-0.03em",
                     lineHeight: "1.1",
                     marginBottom: "16px",
                   }}
@@ -164,8 +164,8 @@ export default async function AreaDetalhe({ params }: Props) {
               <div
                 style={{
                   position: "relative",
-                  width: "200px",
-                  height: "200px",
+                  width: "clamp(120px, 30vw, 200px)",
+                  height: "clamp(120px, 30vw, 200px)",
                   flexShrink: 0,
                   borderRadius: "50%",
                   overflow: "hidden",
@@ -178,7 +178,7 @@ export default async function AreaDetalhe({ params }: Props) {
                   src={areaImage}
                   alt={area.title}
                   fill
-                  sizes="200px"
+                  sizes="(max-width: 640px) 120px, 200px"
                   priority
                   style={{ objectFit: "cover" }}
                 />
@@ -224,8 +224,8 @@ export default async function AreaDetalhe({ params }: Props) {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "12px 48px",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))",
+            gap: "12px clamp(16px, 4vw, 48px)",
           }}
         >
           {[col1, col2].map((col, ci) => (

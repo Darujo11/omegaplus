@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -23,6 +21,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "E-mail inválido" }, { status: 400 });
     }
 
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json({ error: "Serviço de e-mail não configurado" }, { status: 503 });
+    }
+
+    const resend = new Resend(apiKey);
     const to = process.env.CONTACT_EMAIL ?? "omega@omegacsa.com.br";
 
     await resend.emails.send({

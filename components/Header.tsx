@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { NAV_LINKS, SITE } from "@/lib/site-data";
 
 export default function Header() {
@@ -42,51 +43,27 @@ export default function Header() {
         style={{
           maxWidth: "1200px",
           margin: "0 auto",
-          padding: "0 24px",
-          height: "72px",
+          padding: "0 clamp(16px, 4vw, 24px)",
+          height: "76px",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
         }}
       >
         {/* Logo */}
-        <Link href="/" style={{ textDecoration: "none" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <Image
-              src="/favicon/web-app-manifest-512x512.png"
-              alt="Omega CSA Engenharia"
-              width={42}
-              height={42}
-              priority
-              style={{ width: "42px", height: "42px", borderRadius: "6px" }}
-            />
-            <div>
-              <div
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "15px",
-                  fontWeight: "700",
-                  color: "#e8edf5",
-                  letterSpacing: "0.02em",
-                  lineHeight: "1.1",
-                }}
-              >
-                OMEGA CSA
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-mono, monospace)",
-                  fontSize: "9px",
-                  fontWeight: "500",
-                  color: "#5a9e2f",
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                }}
-              >
-                ENGENHARIA
-              </div>
-            </div>
-          </div>
+        <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
+          <Image
+            src="/logo max.png"
+            alt="Omega CSA Engenharia"
+            width={220}
+            height={102}
+            priority
+            style={{
+              height: "46px",
+              width: "auto",
+              mixBlendMode: "screen",
+            }}
+          />
         </Link>
 
         {/* Desktop Nav */}
@@ -129,11 +106,14 @@ export default function Header() {
         </nav>
 
         {/* CTA Desktop */}
-        <a
+        <motion.a
           href={`https://wa.me/${SITE.social.whatsapp}`}
           target="_blank"
           rel="noopener noreferrer"
           className="hidden md:block"
+          whileHover={{ opacity: 0.85 }}
+          whileTap={{ scale: 0.96 }}
+          transition={{ duration: 0.12 }}
           style={{
             padding: "10px 20px",
             borderRadius: "8px",
@@ -142,18 +122,18 @@ export default function Header() {
             textDecoration: "none",
             background: "linear-gradient(135deg, #1a7fc1 0%, #0d5a8a 100%)",
             color: "#fff",
-            transition: "opacity 0.2s",
+            display: "inline-block",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
-          onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
         >
           WhatsApp
-        </a>
+        </motion.a>
 
         {/* Mobile toggle */}
-        <button
+        <motion.button
           className="md:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
+          whileTap={{ scale: 0.88 }}
+          transition={{ duration: 0.1 }}
           style={{
             background: "none",
             border: "none",
@@ -162,63 +142,105 @@ export default function Header() {
             padding: "8px",
           }}
         >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+          <AnimatePresence mode="wait" initial={false}>
+            {mobileOpen ? (
+              <motion.span
+                key="close"
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.15 }}
+                style={{ display: "block" }}
+              >
+                <X size={22} />
+              </motion.span>
+            ) : (
+              <motion.span
+                key="menu"
+                initial={{ rotate: 90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: -90, opacity: 0 }}
+                transition={{ duration: 0.15 }}
+                style={{ display: "block" }}
+              >
+                <Menu size={22} />
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </motion.button>
       </div>
 
       {/* Mobile menu */}
-      {mobileOpen && (
-        <div
-          style={{
-            background: "rgba(8, 14, 26, 0.98)",
-            backdropFilter: "blur(12px)",
-            borderTop: "1px solid rgba(26, 45, 74, 0.6)",
-            padding: "16px 24px 24px",
-          }}
-        >
-          {NAV_LINKS.map((link) => {
-            const active = pathname === link.href;
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                style={{
-                  display: "block",
-                  padding: "12px 16px",
-                  borderRadius: "8px",
-                  fontSize: "15px",
-                  fontWeight: "500",
-                  textDecoration: "none",
-                  color: active ? "#1a7fc1" : "#8a9ab0",
-                  background: active ? "rgba(26, 127, 193, 0.1)" : "transparent",
-                  marginBottom: "4px",
-                }}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-          <a
-            href={`https://wa.me/${SITE.social.whatsapp}`}
-            target="_blank"
-            rel="noopener noreferrer"
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8, height: 0 }}
+            animate={{ opacity: 1, y: 0, height: "auto" }}
+            exit={{ opacity: 0, y: -8, height: 0 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
             style={{
-              display: "block",
-              marginTop: "12px",
-              padding: "12px 20px",
-              borderRadius: "8px",
-              fontSize: "15px",
-              fontWeight: "600",
-              textDecoration: "none",
-              background: "linear-gradient(135deg, #1a7fc1 0%, #0d5a8a 100%)",
-              color: "#fff",
-              textAlign: "center",
+              overflow: "hidden",
+              background: "rgba(8, 14, 26, 0.98)",
+              backdropFilter: "blur(12px)",
+              borderTop: "1px solid rgba(26, 45, 74, 0.6)",
             }}
           >
-            WhatsApp
-          </a>
-        </div>
-      )}
+            <div style={{ padding: "16px clamp(16px, 4vw, 24px) 24px" }}>
+              {NAV_LINKS.map((link, i) => {
+                const active = pathname === link.href;
+                return (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.04 + 0.04, duration: 0.2 }}
+                  >
+                    <Link
+                      href={link.href}
+                      style={{
+                        display: "block",
+                        padding: "12px 16px",
+                        borderRadius: "8px",
+                        fontSize: "15px",
+                        fontWeight: "500",
+                        textDecoration: "none",
+                        color: active ? "#1a7fc1" : "#8a9ab0",
+                        background: active ? "rgba(26, 127, 193, 0.1)" : "transparent",
+                        marginBottom: "4px",
+                      }}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                );
+              })}
+              <motion.a
+                href={`https://wa.me/${SITE.social.whatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: NAV_LINKS.length * 0.04 + 0.08 }}
+                whileTap={{ scale: 0.97 }}
+                style={{
+                  display: "block",
+                  marginTop: "12px",
+                  padding: "12px 20px",
+                  borderRadius: "8px",
+                  fontSize: "15px",
+                  fontWeight: "600",
+                  textDecoration: "none",
+                  background: "linear-gradient(135deg, #1a7fc1 0%, #0d5a8a 100%)",
+                  color: "#fff",
+                  textAlign: "center",
+                }}
+              >
+                WhatsApp
+              </motion.a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

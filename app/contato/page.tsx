@@ -49,10 +49,10 @@ export default function ContatoPage() {
       {/* Header */}
       <section
         style={{
-          paddingTop: "140px",
+          paddingTop: "clamp(100px, 18vh, 140px)",
           paddingBottom: "64px",
-          paddingLeft: "24px",
-          paddingRight: "24px",
+          paddingLeft: "clamp(16px, 4vw, 24px)",
+          paddingRight: "clamp(16px, 4vw, 24px)",
           maxWidth: "1200px",
           margin: "0 auto",
         }}
@@ -75,7 +75,7 @@ export default function ContatoPage() {
               fontSize: "var(--text-4xl)",
               fontWeight: "700",
               color: "#e8edf5",
-              letterSpacing: "-2px",
+              letterSpacing: "-0.04em",
               lineHeight: "1.1",
               marginBottom: "24px",
             }}
@@ -102,8 +102,8 @@ export default function ContatoPage() {
           maxWidth: "1200px",
           margin: "0 auto",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-          gap: "40px",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))",
+          gap: "clamp(24px, 5vw, 40px)",
           alignItems: "start",
         }}
       >
@@ -199,7 +199,7 @@ export default function ContatoPage() {
         <AnimatedSection delay={0.15}>
           <div
             style={{
-              padding: "36px",
+              padding: "clamp(20px, 4vw, 36px)",
               borderRadius: "16px",
               background: "#0d1526",
               border: "1px solid #1a2d4a",
