@@ -85,7 +85,7 @@ export default function HomePage() {
             objectPosition: "center",
           }}
         >
-          <source src="/video_hero/video_veo_3.1_-_fast_1781042397303.mp4" type="video/mp4" />
+          <source src="/video_hero/omega.mp4" type="video/mp4" />
         </video>
 
         {/* Blueprint grid on top of video */}
