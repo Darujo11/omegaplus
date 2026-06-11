@@ -189,11 +189,11 @@ export default function PortfolioPage() {
       </section>
 
       {/* Projects grid */}
-      <section style={{ padding: "0 24px 80px", maxWidth: "1200px", margin: "0 auto" }}>
+      <section style={{ padding: "0 clamp(16px, 4vw, 24px) clamp(56px, 8vw, 80px)", maxWidth: "1200px", margin: "0 auto" }}>
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(min(340px, 100%), 1fr))",
+            gridTemplateColumns: "repeat(auto-fill, minmax(min(280px, 100%), 1fr))",
             gap: "20px",
           }}
         >
@@ -218,7 +218,7 @@ export default function PortfolioPage() {
                 {/* Project photo */}
                 <div
                   style={{
-                    height: "190px",
+                    height: "clamp(160px, 28vw, 200px)",
                     background: "#0a1628",
                     borderBottom: "1px solid #1a2d4a",
                     position: "relative",

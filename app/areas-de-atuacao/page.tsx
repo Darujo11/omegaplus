@@ -90,7 +90,7 @@ export default function AreasDeAtuacaoPage() {
       </section>
 
       {/* Areas grid */}
-      <section style={{ padding: "0 24px 96px", maxWidth: "1200px", margin: "0 auto" }}>
+      <section style={{ padding: "0 clamp(16px, 4vw, 24px) clamp(64px, 9vw, 96px)", maxWidth: "1200px", margin: "0 auto" }}>
         <div
           style={{
             display: "grid",

@@ -88,7 +88,7 @@ export default function HomePage() {
             top: 0,
             left: 0,
             right: 0,
-            height: "220px",
+            height: "clamp(140px, 20vw, 220px)",
             zIndex: 3,
             background: "linear-gradient(to bottom, rgba(8,14,26,0.75) 0%, transparent 100%)",
             pointerEvents: "none",
@@ -103,7 +103,7 @@ export default function HomePage() {
             bottom: 0,
             left: 0,
             right: 0,
-            height: "260px",
+            height: "clamp(180px, 22vw, 260px)",
             zIndex: 3,
             background: "linear-gradient(to top, rgba(8,14,26,0.95) 0%, transparent 100%)",
             pointerEvents: "none",
@@ -118,8 +118,8 @@ export default function HomePage() {
             top: "50%",
             left: "20%",
             transform: "translate(-50%, -50%)",
-            width: "800px",
-            height: "600px",
+            width: "clamp(320px, 70vw, 800px)",
+            height: "clamp(240px, 55vw, 600px)",
             background: "radial-gradient(ellipse at center, rgba(26,127,193,0.1) 0%, transparent 68%)",
             pointerEvents: "none",
             zIndex: 3,
@@ -287,7 +287,7 @@ export default function HomePage() {
       >
         {/* Header */}
         <AnimatedSection>
-          <div style={{ textAlign: "center", padding: "0 24px", marginBottom: "56px" }}>
+          <div style={{ textAlign: "center", padding: "0 clamp(16px, 4vw, 24px)", marginBottom: "56px" }}>
             <div
               className="accent-line"
               style={{ margin: "0 auto 20px" }}
@@ -494,7 +494,7 @@ export default function HomePage() {
               maxWidth: "1200px",
               margin: "0 auto",
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(min(340px, 100%), 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))",
               gap: "clamp(28px, 5vw, 64px)",
               alignItems: "center",
               position: "relative",

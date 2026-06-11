@@ -82,7 +82,7 @@ export default function ServicosTecnicosPage() {
       {/* Services grid */}
       <section
         style={{
-          padding: "0 24px 80px",
+          padding: "0 clamp(16px, 4vw, 24px) clamp(56px, 8vw, 80px)",
           maxWidth: "1200px",
           margin: "0 auto",
         }}
@@ -90,7 +90,7 @@ export default function ServicosTecnicosPage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(340px, 100%), 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))",
             gap: "20px",
           }}
         >
@@ -276,7 +276,7 @@ export default function ServicosTecnicosPage() {
       </section>
 
       {/* CTA */}
-      <section style={{ padding: "0 24px 80px", maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
+      <section style={{ padding: "0 clamp(16px, 4vw, 24px) clamp(56px, 8vw, 80px)", maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
         <AnimatedSection>
           <h2
             style={{

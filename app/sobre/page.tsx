@@ -119,7 +119,7 @@ export default function SobrePage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))",
               gap: "clamp(28px, 5vw, 64px)",
               alignItems: "start",
             }}
@@ -220,7 +220,7 @@ export default function SobrePage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))",
             gap: "20px",
           }}
         >
@@ -698,7 +698,7 @@ export default function SobrePage() {
       </section>
 
       {/* CTA */}
-      <section style={{ padding: "0 24px 80px" }}>
+      <section style={{ padding: "0 clamp(16px, 4vw, 24px) clamp(56px, 8vw, 80px)" }}>
         <AnimatedSection>
           <div
             style={{

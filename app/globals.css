@@ -453,3 +453,23 @@ section {
   overflow: hidden;
   position: relative;
 }
+
+/* Contact form — 2-col on ≥540px, single col on mobile */
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 540px) {
+  .form-grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Page section padding — tighter on mobile */
+@media (max-width: 480px) {
+  .section-padded {
+    padding-inline: 16px !important;
+  }
+}

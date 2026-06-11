@@ -8,6 +8,7 @@ type Status = "idle" | "sending" | "success" | "error";
 const inputStyle: React.CSSProperties = {
   width: "100%",
   padding: "12px 16px",
+  minHeight: "44px",
   borderRadius: "8px",
   background: "#080e1a",
   border: "1px solid #1a2d4a",
@@ -87,7 +88,7 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+      <div className="form-grid-2">
         <div>
           <label htmlFor="name" style={labelStyle}>Nome *</label>
           <input
@@ -203,6 +204,7 @@ export default function ContactForm() {
           justifyContent: "center",
           gap: "8px",
           padding: "14px",
+          minHeight: "44px",
           borderRadius: "8px",
           fontSize: "15px",
           fontWeight: "600",

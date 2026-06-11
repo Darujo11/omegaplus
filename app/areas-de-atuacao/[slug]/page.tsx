@@ -191,7 +191,7 @@ export default async function AreaDetalhe({ params }: Props) {
       {/* Services list */}
       <section
         style={{
-          padding: "0 24px 80px",
+          padding: "0 clamp(16px, 4vw, 24px) clamp(56px, 8vw, 80px)",
           maxWidth: "1200px",
           margin: "0 auto",
         }}
@@ -224,7 +224,7 @@ export default async function AreaDetalhe({ params }: Props) {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))",
             gap: "12px clamp(16px, 4vw, 48px)",
           }}
         >

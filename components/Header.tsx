@@ -44,7 +44,7 @@ export default function Header() {
           maxWidth: "1200px",
           margin: "0 auto",
           padding: "0 clamp(16px, 4vw, 24px)",
-          height: "76px",
+          height: "clamp(60px, 12vw, 76px)",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
@@ -139,7 +139,7 @@ export default function Header() {
             border: "none",
             color: "#e8edf5",
             cursor: "pointer",
-            padding: "8px",
+            padding: "12px",
           }}
         >
           <AnimatePresence mode="wait" initial={false}>

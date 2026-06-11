@@ -121,7 +121,7 @@ export default function ClientesPage() {
       {/* Video destaque */}
       <section
         style={{
-          padding: "0 24px 68px",
+          padding: "0 clamp(16px, 4vw, 24px) clamp(48px, 7vw, 68px)",
           maxWidth: "1200px",
           margin: "0 auto",
         }}
@@ -159,7 +159,7 @@ export default function ClientesPage() {
       {/* Who we serve */}
       <section
         style={{
-          padding: "0 24px 80px",
+          padding: "0 clamp(16px, 4vw, 24px) clamp(56px, 8vw, 80px)",
           maxWidth: "1200px",
           margin: "0 auto",
         }}
@@ -278,7 +278,7 @@ export default function ClientesPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fill, minmax(min(280px, 100%), 1fr))",
               gap: "20px",
             }}
           >
