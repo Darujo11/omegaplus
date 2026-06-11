@@ -75,7 +75,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav style={{ display: "flex", alignItems: "center", gap: "2px" }} className="hidden md:flex">
+          <nav className="nav-desktop">
             {NAV_LINKS.map((link) => {
               const active = pathname === link.href;
               return (
@@ -118,7 +118,7 @@ export default function Header() {
             href={`https://wa.me/${SITE.social.whatsapp}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:block"
+            className="cta-desktop"
             whileHover={{ opacity: 0.85 }}
             whileTap={{ scale: 0.96 }}
             transition={{ duration: 0.12 }}
@@ -130,7 +130,6 @@ export default function Header() {
               textDecoration: "none",
               background: "linear-gradient(135deg, #1a7fc1 0%, #0d5a8a 100%)",
               color: "#fff",
-              display: "inline-block",
             }}
           >
             WhatsApp
@@ -138,7 +137,7 @@ export default function Header() {
 
           {/* Mobile toggle */}
           <motion.button
-            className="md:hidden"
+            className="menu-toggle"
             onClick={() => setMobileOpen(!mobileOpen)}
             whileTap={{ scale: 0.88 }}
             transition={{ duration: 0.1 }}
@@ -150,7 +149,6 @@ export default function Header() {
               color: "#e8edf5",
               cursor: "pointer",
               padding: "12px",
-              display: "flex",
               alignItems: "center",
               justifyContent: "center",
               minWidth: "44px",
@@ -190,6 +188,7 @@ export default function Header() {
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
+              className="mobile-drawer"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
@@ -279,7 +278,7 @@ export default function Header() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            className="md:hidden"
+            className="mobile-overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

@@ -454,6 +454,40 @@ section {
   position: relative;
 }
 
+/* Header — visibilidade mobile/desktop (inline styles não podem conflitar) */
+.nav-desktop {
+  display: none;
+}
+
+.cta-desktop {
+  display: none;
+}
+
+.menu-toggle {
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  .nav-desktop {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .cta-desktop {
+    display: inline-block;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  .mobile-drawer,
+  .mobile-overlay {
+    display: none;
+  }
+}
+
 /* Contact form — 2-col on ≥540px, single col on mobile */
 .form-grid-2 {
   display: grid;
