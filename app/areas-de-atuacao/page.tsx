@@ -43,10 +43,10 @@ export default function AreasDeAtuacaoPage() {
       {/* Header */}
       <section
         style={{
-          paddingTop: "140px",
+          paddingTop: "clamp(100px, 18vh, 140px)",
           paddingBottom: "64px",
-          paddingLeft: "24px",
-          paddingRight: "24px",
+          paddingLeft: "clamp(16px, 4vw, 24px)",
+          paddingRight: "clamp(16px, 4vw, 24px)",
           maxWidth: "1200px",
           margin: "0 auto",
         }}
@@ -69,7 +69,7 @@ export default function AreasDeAtuacaoPage() {
               fontSize: "var(--text-4xl)",
               fontWeight: "700",
               color: "#e8edf5",
-              letterSpacing: "-2px",
+              letterSpacing: "-0.04em",
               lineHeight: "1.1",
               marginBottom: "24px",
             }}
@@ -94,7 +94,7 @@ export default function AreasDeAtuacaoPage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fill, minmax(min(320px, 100%), 1fr))",
             gap: "20px",
           }}
         >

@@ -109,10 +109,10 @@ export default function PortfolioPage() {
       {/* Header */}
       <section
         style={{
-          paddingTop: "140px",
+          paddingTop: "clamp(100px, 18vh, 140px)",
           paddingBottom: "80px",
-          paddingLeft: "24px",
-          paddingRight: "24px",
+          paddingLeft: "clamp(16px, 4vw, 24px)",
+          paddingRight: "clamp(16px, 4vw, 24px)",
           maxWidth: "1200px",
           margin: "0 auto",
           position: "relative",
@@ -193,7 +193,7 @@ export default function PortfolioPage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fill, minmax(min(340px, 100%), 1fr))",
             gap: "20px",
           }}
         >

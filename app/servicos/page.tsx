@@ -33,10 +33,10 @@ export default function ServicosTecnicosPage() {
       {/* Header */}
       <section
         style={{
-          paddingTop: "140px",
+          paddingTop: "clamp(100px, 18vh, 140px)",
           paddingBottom: "80px",
-          paddingLeft: "24px",
-          paddingRight: "24px",
+          paddingLeft: "clamp(16px, 4vw, 24px)",
+          paddingRight: "clamp(16px, 4vw, 24px)",
           maxWidth: "1200px",
           margin: "0 auto",
         }}
@@ -59,7 +59,7 @@ export default function ServicosTecnicosPage() {
               fontSize: "var(--text-4xl)",
               fontWeight: "700",
               color: "#e8edf5",
-              letterSpacing: "-2px",
+              letterSpacing: "-0.04em",
               lineHeight: "1.1",
               marginBottom: "24px",
             }}
@@ -90,7 +90,7 @@ export default function ServicosTecnicosPage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(340px, 100%), 1fr))",
             gap: "20px",
           }}
         >
@@ -228,7 +228,7 @@ export default function ServicosTecnicosPage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(220px, 100%), 1fr))",
             gap: "20px",
           }}
         >

@@ -52,10 +52,10 @@ export default function SobrePage() {
       {/* Page header */}
       <section
         style={{
-          paddingTop: "140px",
+          paddingTop: "clamp(100px, 18vh, 140px)",
           paddingBottom: "80px",
-          paddingLeft: "24px",
-          paddingRight: "24px",
+          paddingLeft: "clamp(16px, 4vw, 24px)",
+          paddingRight: "clamp(16px, 4vw, 24px)",
           maxWidth: "1200px",
           margin: "0 auto",
           position: "relative",
@@ -119,8 +119,8 @@ export default function SobrePage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-              gap: "64px",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))",
+              gap: "clamp(28px, 5vw, 64px)",
               alignItems: "start",
             }}
           >
@@ -220,7 +220,7 @@ export default function SobrePage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))",
             gap: "20px",
           }}
         >
@@ -506,7 +506,7 @@ export default function SobrePage() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+                gridTemplateColumns: "repeat(auto-fit, minmax(min(240px, 100%), 1fr))",
                 gap: "12px",
               }}
             >
@@ -587,7 +587,7 @@ export default function SobrePage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))",
               gap: "12px",
             }}
           >
@@ -647,7 +647,7 @@ export default function SobrePage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))",
             gap: "20px",
           }}
         >
@@ -704,7 +704,7 @@ export default function SobrePage() {
             style={{
               maxWidth: "700px",
               margin: "0 auto",
-              padding: "48px 40px",
+              padding: "clamp(28px,5vw,48px) clamp(20px,4vw,40px)",
               borderRadius: "20px",
               background: "#0d1526",
               border: "1px solid #1a2d4a",

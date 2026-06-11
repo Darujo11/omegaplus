@@ -11,7 +11,7 @@ export default function Footer() {
       style={{
         background: "#060c18",
         borderTop: "1px solid #1a2d4a",
-        padding: "64px 24px 32px",
+        padding: "clamp(40px, 8vw, 64px) clamp(16px, 4vw, 24px) 32px",
       }}
     >
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
@@ -19,46 +19,24 @@ export default function Footer() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: "48px",
+            gap: "clamp(24px, 5vw, 48px)",
             marginBottom: "48px",
           }}
         >
           {/* Brand */}
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+            <div style={{ marginBottom: "16px" }}>
               <Image
-                src="/favicon/web-app-manifest-512x512.png"
+                src="/logo max.png"
                 alt="Omega CSA Engenharia"
-                width={42}
-                height={42}
-                style={{ width: "42px", height: "42px", borderRadius: "6px" }}
+                width={220}
+                height={102}
+                style={{
+                  height: "56px",
+                  width: "auto",
+                  mixBlendMode: "screen",
+                }}
               />
-              <div>
-                <div
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "15px",
-                    fontWeight: "700",
-                    color: "#e8edf5",
-                    letterSpacing: "0.02em",
-                    lineHeight: "1.1",
-                  }}
-                >
-                  OMEGA CSA
-                </div>
-                <div
-                  style={{
-                    fontFamily: "var(--font-mono, monospace)",
-                    fontSize: "9px",
-                    fontWeight: "500",
-                    color: "#5a9e2f",
-                    letterSpacing: "0.18em",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  ENGENHARIA
-                </div>
-              </div>
             </div>
             <p style={{ fontSize: "14px", color: "#6b7d96", lineHeight: "1.6", maxWidth: "260px" }}>
               {SITE.tagline}
