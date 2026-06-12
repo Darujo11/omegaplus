@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import { AREAS, SITE } from "@/lib/site-data";
+import { areaJsonLd, breadcrumbJsonLd } from "@/lib/structured-data";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -74,8 +75,21 @@ export default async function AreaDetalhe({ params }: Props) {
 
   const areaImage = areaImages[slug];
 
+  const jsonLd = [
+    areaJsonLd(area),
+    breadcrumbJsonLd([
+      { name: "Início", path: "/" },
+      { name: "Áreas de Atuação", path: "/areas-de-atuacao" },
+      { name: area.title, path: `/areas-de-atuacao/${area.slug}` },
+    ]),
+  ];
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Header */}
       <section
         style={{

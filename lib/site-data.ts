@@ -1,6 +1,7 @@
 export const SITE = {
   name: "Omega CSA Engenharia",
   shortName: "Omega CSA",
+  url: "https://omegacsa.com.br",
   tagline: "Soluções integradas em engenharia para obras públicas, privadas, industriais e ambientais.",
   description:
     "Soluções integradas em engenharia para obras públicas, privadas, industriais e ambientais. Projetos, fiscalização e consultoria especializada em Campos dos Goytacazes, RJ.",

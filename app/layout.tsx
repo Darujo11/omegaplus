@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
+import { SITE } from "@/lib/site-data";
+import { organizationJsonLd } from "@/lib/structured-data";
 
 // IBM Plex — superfamília criada pela IBM para uma empresa de tecnologia/engenharia.
 // Sans para títulos + corpo; Mono (mesma família) para labels técnicos, specs e números.
@@ -22,6 +24,8 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE.url),
+  alternates: { canonical: "./" },
   title: {
     default: "Omega CSA Engenharia — Campos dos Goytacazes, RJ",
     template: "%s | Omega CSA Engenharia",
@@ -51,7 +55,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "pt_BR",
+    url: SITE.url,
     siteName: "Omega CSA Engenharia",
+    title: "Omega CSA Engenharia",
+    description: "Engenharia civil, recursos hídricos e saneamento no Norte Fluminense.",
+  },
+  twitter: {
+    card: "summary_large_image",
     title: "Omega CSA Engenharia",
     description: "Engenharia civil, recursos hídricos e saneamento no Norte Fluminense.",
   },
@@ -62,6 +72,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR" className={`${plexSans.variable} ${plexMono.variable}`}>
       <body style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <ScrollProgress />
         <Header />
         <main>{children}</main>

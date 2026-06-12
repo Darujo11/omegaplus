@@ -72,6 +72,18 @@
 
 Tudo em `lib/site-data.ts`: SITE, STATS, SERVICES, NAV_LINKS. Atualizar aqui para propagar por todo o site.
 
+## SEO / AI SEO
+
+- `SITE.url` (`lib/site-data.ts`) — domínio canônico de produção, fonte única para todas as URLs absolutas
+- `app/sitemap.ts` — sitemap.xml (rotas estáticas + 11 áreas de atuação)
+- `app/robots.ts` — robots.txt; crawlers de IA (GPTBot, PerplexityBot, ClaudeBot, Google-Extended) liberados explicitamente
+- `lib/structured-data.ts` — JSON-LD schema.org: `ProfessionalService` (org, no layout) + `Service`/`BreadcrumbList` (páginas de área)
+- `app/layout.tsx` — `metadataBase` + `alternates.canonical: "./"` (canônica automática por rota)
+- `public/llms.txt` — contexto para motores de IA (ChatGPT, Claude, Perplexity)
+- `app/opengraph-image.tsx` — OG image 1200×630 gerada em build (previews WhatsApp/redes)
+
+Ações off-site pendentes (manuais): Google Business Profile, Google Search Console (verificar domínio + enviar sitemap).
+
 ## Configurações obrigatórias
 
 - `next.config.ts` — `devIndicators: false` (sem overlay de devtools)
