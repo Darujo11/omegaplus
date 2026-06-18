@@ -70,6 +70,7 @@ export const AREAS = [
     title: "Engenharia Civil, Arquitetura e Urbanismo",
     shortDesc: "Projetos civis, arquitetônicos, urbanísticos e acompanhamento técnico de obras.",
     icon: "building",
+    image: "/icones/engenharia-civil.png",
     services: [
       "Projetos arquitetônicos residenciais, comerciais, institucionais e industriais",
       "Projetos de reformas, ampliações, adequações e revitalizações",
@@ -92,6 +93,7 @@ export const AREAS = [
     title: "Projetos Estruturais",
     shortDesc: "Estruturas de concreto armado, metálicas, fundações e diagnóstico de patologias.",
     icon: "layers",
+    image: "/icones/projetos-estruturais.png",
     services: [
       "Projetos estruturais de edificações em concreto armado",
       "Projetos de estruturas metálicas",
@@ -111,6 +113,7 @@ export const AREAS = [
     title: "Engenharia Hidrossanitária",
     shortDesc: "Instalações hidráulicas, sanitárias, pluviais e sistemas de pressurização predial.",
     icon: "droplets",
+    image: "/icones/hidrossanitaria.png",
     services: [
       "Projetos de instalações hidráulicas prediais",
       "Projetos de instalações sanitárias",
@@ -129,6 +132,7 @@ export const AREAS = [
     title: "Engenharia Sanitária e Ambiental",
     shortDesc: "Drenagem urbana, saneamento, ETE/ETA, licenciamento ambiental e gestão hídrica.",
     icon: "leaf",
+    image: "/icones/sanitaria-ambiental.png",
     services: [
       "Estudos e projetos de microdrenagem e macrodrenagem urbana",
       "Estudos hidrológicos e hidráulicos",
@@ -161,6 +165,7 @@ export const AREAS = [
     title: "Segurança do Trabalho",
     shortDesc: "Engenharia de segurança, gestão de riscos, laudos de insalubridade e NRs.",
     icon: "shield",
+    image: "/icones/seguranca-do-trabalho.png",
     services: [
       "Projetos de segurança do trabalho para obras e atividades industriais",
       "Plano de gerenciamento de riscos — PGR/GRO",
@@ -184,6 +189,7 @@ export const AREAS = [
     title: "Geotecnia, Barragens e Segurança de Estruturas",
     shortDesc: "Estudos geotécnicos, contenção de encostas, segurança de barragens e instrumentação.",
     icon: "mountain",
+    image: "/icones/geotecnia-barragens.png",
     services: [
       "Estudos geotécnicos para obras civis",
       "Sondagem de terreno e investigação geotécnica",
@@ -206,6 +212,7 @@ export const AREAS = [
     title: "Engenharia Mecânica",
     shortDesc: "Projetos de bombas, equipamentos operacionais, ventilação e climatização.",
     icon: "settings",
+    image: "/icones/engenharia-mecanica.png",
     services: [
       "Projetos de casas de bombas",
       "Dimensionamento de bombas, conjuntos motobomba e sistemas de recalque",
@@ -225,6 +232,7 @@ export const AREAS = [
     title: "Cartografia, Geodésia, Topografia e Geoprocessamento",
     shortDesc: "Levantamentos topográficos, georreferenciamento, drones e regularização fundiária.",
     icon: "map",
+    image: "",
     services: [
       "Levantamento planialtimétrico",
       "Levantamento cadastral urbano e rural",
@@ -248,6 +256,7 @@ export const AREAS = [
     title: "Avaliações, Perícias e Inspeções",
     shortDesc: "Laudos técnicos, perícias judiciais, inspeção predial e vídeo inspeção robotizada.",
     icon: "search",
+    image: "/icones/avaliacoes-pericias.png",
     services: [
       "Inspeção predial em edificações residenciais, comerciais e industriais",
       "Inspeção em condomínios e prédios",
@@ -276,6 +285,7 @@ export const AREAS = [
     title: "Engenharia Elétrica",
     shortDesc: "Projetos elétricos prediais, industriais, energia solar, SPDA e eficiência energética.",
     icon: "zap",
+    image: "/icones/engenharia-eletrica.png",
     services: [
       "Projetos elétricos residenciais, comerciais, prediais e industriais",
       "Projetos de baixa e média tensão",
@@ -295,6 +305,7 @@ export const AREAS = [
     title: "Engenharia de Modelagem e Tecnologia",
     shortDesc: "BIM, escaneamento 3D a laser, drones, vídeo inspeção e modelagem hidrodinâmica.",
     icon: "cpu",
+    image: "/icones/modelagem-tecnologia.png",
     services: [
       "Topografia de precisão com equipamentos de última geração",
       "Mapeamento de redes e instalações subterrâneas",

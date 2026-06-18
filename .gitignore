@@ -42,3 +42,12 @@ next-env.d.ts
 
 # local deployment notes
 auxiliovps/
+
+# local agent tooling (Claude Code / skills)
+/.agents/
+/.claude/
+/skills-lock.json
+
+# raw asset sources — cópias de produção vivem em public/icones e public/video_hero
+/public/ICONES OMEGA/
+/public/estilo

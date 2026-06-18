@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedStats from "@/components/AnimatedStats";
 import AreasSection from "@/components/AreasSection";
+import HeroAreaNav from "@/components/HeroAreaNav";
 import { SITE, AREAS } from "@/lib/site-data";
 
 export const metadata: Metadata = {
@@ -42,13 +43,14 @@ export default function HomePage() {
           alignItems: "center",
         }}
       >
-        {/* Video background */}
+        {/* Video background — objeto de engenharia se formando, ancorado à direita */}
         <video
           autoPlay
           muted
           loop
           playsInline
           preload="metadata"
+          poster="/video_hero/hero-poster.png"
           className="hero-video"
           style={{
             position: "absolute",
@@ -56,10 +58,24 @@ export default function HomePage() {
             width: "100%",
             height: "100%",
             objectFit: "cover",
+            filter: "brightness(0.82) saturate(1.05)",
           }}
         >
-          <source src="/video_hero/omega.mp4" type="video/mp4" />
+          <source src="/video_hero/videoback.mp4" type="video/mp4" />
         </video>
+
+        {/* Tint navy — harmoniza o azul-claro do vídeo com a paleta dark da marca */}
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 1,
+            background: "rgba(8,14,26,0.42)",
+            mixBlendMode: "multiply",
+            pointerEvents: "none",
+          }}
+        />
 
         {/* Blueprint grid on top of video */}
         <div
@@ -76,7 +92,7 @@ export default function HomePage() {
             inset: 0,
             zIndex: 2,
             background:
-              "linear-gradient(100deg, rgba(8,14,26,0.97) 0%, rgba(8,14,26,0.93) 32%, rgba(8,14,26,0.55) 58%, rgba(8,14,26,0.08) 100%)",
+              "linear-gradient(90deg, rgba(8,14,26,0.97) 0%, rgba(8,14,26,0.93) 28%, rgba(8,14,26,0.5) 50%, rgba(8,14,26,0.93) 72%, rgba(8,14,26,0.97) 100%)",
           }}
         />
 
@@ -116,7 +132,7 @@ export default function HomePage() {
           style={{
             position: "absolute",
             top: "50%",
-            left: "20%",
+            left: "50%",
             transform: "translate(-50%, -50%)",
             width: "clamp(320px, 70vw, 800px)",
             height: "clamp(240px, 55vw, 600px)",
@@ -178,98 +194,77 @@ export default function HomePage() {
             maxWidth: "1240px",
             width: "100%",
             margin: "0 auto",
-            padding: "clamp(100px,18vh,120px) clamp(16px,4vw,32px) clamp(60px,10vh,96px)",
+            padding: "clamp(74px,9vh,86px) clamp(16px,4vw,32px) clamp(30px,5vh,44px)",
           }}
         >
-          {/* Text — coluna esquerda, ~metade da largura */}
-          <div style={{ maxWidth: "600px" }}>
-            {/* Heading */}
-            <AnimatedSection delay={0.1}>
+          {/* Eyebrow + H1 compacto (SEO) — centralizado no topo */}
+          <AnimatedSection delay={0.05}>
+            <div style={{ textAlign: "center", marginBottom: "clamp(20px,4vh,40px)" }}>
+              <span
+                style={{
+                  display: "inline-block",
+                  fontFamily: "var(--font-code)",
+                  fontSize: "11px",
+                  fontWeight: "500",
+                  color: "#3d9fd8",
+                  letterSpacing: "0.14em",
+                  textTransform: "uppercase",
+                  marginBottom: "12px",
+                  opacity: 0.85,
+                }}
+              >
+                Explore nossas soluções
+              </span>
               <h1
                 className="display-heading"
                 style={{
-                  fontSize: "var(--text-5xl)",
+                  fontSize: "var(--text-2xl)",
                   fontWeight: "700",
                   color: "#e8edf5",
-                  lineHeight: "1.0",
-                  letterSpacing: "-0.04em",
-                  marginBottom: "28px",
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.035em",
+                  margin: 0,
                 }}
               >
-                Engenharia de{" "}
-                <span
-                  style={{
-                    background: "linear-gradient(135deg, #3d9fd8 0%, #1a7fc1 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  confiança,
-                </span>
-                <br />
-                parceria que dura.
+                Áreas de atuação em engenharia
               </h1>
-            </AnimatedSection>
+            </div>
+          </AnimatedSection>
 
-            <AnimatedSection delay={0.2}>
-              <p
+          {/* Duas colunas de áreas flanqueando o objeto central */}
+          <div className="hero-areas-split">
+            <HeroAreaNav items={AREAS.slice(0, 6)} side="left" />
+            <HeroAreaNav items={AREAS.slice(6)} side="right" />
+          </div>
+
+          {/* CTA principal — centralizada embaixo */}
+          <AnimatedSection delay={0.7}>
+            <div
+              className="hero-actions"
+              style={{ gap: "14px", marginTop: "clamp(22px,4vh,38px)", justifyContent: "center" }}
+            >
+              <Link
+                href="/contato"
+                className="btn-ghost-hover"
                 style={{
-                  fontSize: "17px",
-                  color: "#6b7d96",
-                  lineHeight: "1.75",
-                  maxWidth: "50ch",
-                  marginBottom: "48px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  padding: "14px 28px",
+                  borderRadius: "10px",
+                  fontSize: "14px",
+                  fontWeight: "700",
+                  textDecoration: "none",
+                  background: "linear-gradient(135deg, #1a7fc1 0%, #0d5a8a 100%)",
+                  color: "#fff",
+                  boxShadow: "0 8px 32px rgba(26,127,193,0.3), inset 0 1px 0 rgba(255,255,255,0.1)",
+                  letterSpacing: "0.01em",
                 }}
               >
-                Soluções integradas em engenharia para obras públicas, privadas, industriais e ambientais.
-              </p>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.3}>
-              <div className="hero-actions" style={{ gap: "14px" }}>
-                <Link
-                  href="/contato"
-                  className="btn-ghost-hover"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "8px",
-                    padding: "14px 28px",
-                    borderRadius: "10px",
-                    fontSize: "14px",
-                    fontWeight: "700",
-                    textDecoration: "none",
-                    background: "linear-gradient(135deg, #1a7fc1 0%, #0d5a8a 100%)",
-                    color: "#fff",
-                    boxShadow: "0 8px 32px rgba(26,127,193,0.3), inset 0 1px 0 rgba(255,255,255,0.1)",
-                    letterSpacing: "0.01em",
-                  }}
-                >
-                  Solicitar Orçamento <ArrowRight size={15} />
-                </Link>
-                <Link
-                  href="/areas-de-atuacao"
-                  className="btn-ghost-hover"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "8px",
-                    padding: "14px 28px",
-                    borderRadius: "10px",
-                    fontSize: "14px",
-                    fontWeight: "600",
-                    textDecoration: "none",
-                    background: "rgba(255,255,255,0.05)",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    color: "#8a9ab0",
-                  }}
-                >
-                  Áreas de Atuação <ChevronRight size={15} />
-                </Link>
-              </div>
-            </AnimatedSection>
-          </div>
+                Solicitar Orçamento <ArrowRight size={15} />
+              </Link>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
