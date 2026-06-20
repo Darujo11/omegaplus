@@ -581,7 +581,7 @@ export default function HomePage() {
               </a>
               <div style={{ display: "flex", gap: "24px", paddingTop: "4px" }}>
                 <a
-                  href={`tel:${SITE.phone}`}
+                  href={`tel:${SITE.phoneTel}`}
                   className="cta-contact-link"
                   style={{
                     fontFamily: "var(--font-code)",

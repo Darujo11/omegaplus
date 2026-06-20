@@ -13,15 +13,15 @@ export const metadata: Metadata = {
 const contactInfo = [
   {
     icon: <Phone size={18} />,
-    label: "Telefone",
+    label: "Celular",
     value: SITE.phone,
-    href: `tel:${SITE.phone}`,
+    href: `tel:${SITE.phoneTel}`,
   },
   {
     icon: <Phone size={18} />,
     label: "Celular",
     value: SITE.phoneAlt,
-    href: `tel:${SITE.phoneAlt}`,
+    href: `tel:${SITE.phoneAltTel}`,
   },
   {
     icon: <Mail size={18} />,
@@ -30,9 +30,15 @@ const contactInfo = [
     href: `mailto:${SITE.email}`,
   },
   {
+    icon: <Mail size={18} />,
+    label: "E-mail",
+    value: SITE.emailAlt,
+    href: `mailto:${SITE.emailAlt}`,
+  },
+  {
     icon: <MessageSquare size={18} />,
     label: "WhatsApp",
-    value: "(22) 99964-4607",
+    value: SITE.phone,
     href: `https://wa.me/${SITE.social.whatsapp}`,
   },
   {
@@ -112,7 +118,7 @@ export default function ContatoPage() {
           <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {contactInfo.map((item) => (
               <a
-                key={item.label}
+                key={`${item.label}-${item.value}`}
                 href={item.href}
                 target={item.href.startsWith("http") ? "_blank" : undefined}
                 rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}

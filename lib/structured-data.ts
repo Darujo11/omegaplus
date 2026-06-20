@@ -16,8 +16,8 @@ export const organizationJsonLd = {
   url: SITE.url,
   logo: `${SITE.url}/favicon/web-app-manifest-512x512.png`,
   image: `${SITE.url}/favicon/web-app-manifest-512x512.png`,
-  telephone: "+55-22-3025-7633",
-  email: SITE.email,
+  telephone: SITE.phoneTel,
+  email: [SITE.email, SITE.emailAlt],
   address: {
     "@type": "PostalAddress",
     streetAddress: SITE.address.street,
@@ -31,12 +31,20 @@ export const organizationJsonLd = {
     ...SITE.supportOffices.map((city) => ({ "@type": "City" as const, name: city })),
     { "@type": "State", name: "Rio de Janeiro" },
   ],
-  contactPoint: {
-    "@type": "ContactPoint",
-    telephone: "+55-22-99964-4607",
-    contactType: "customer service",
-    availableLanguage: "Portuguese",
-  },
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: SITE.phoneTel,
+      contactType: "customer service",
+      availableLanguage: "Portuguese",
+    },
+    {
+      "@type": "ContactPoint",
+      telephone: SITE.phoneAltTel,
+      contactType: "customer service",
+      availableLanguage: "Portuguese",
+    },
+  ],
   founder: {
     "@type": "Person",
     name: SITE.team.engineer.name,

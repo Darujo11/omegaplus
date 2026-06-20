@@ -107,7 +107,7 @@ CONTACT_EMAIL=omega@omegacsa.com.br
 ## Empresa
 
 - **Razão social**: Omega CSA Engenharia
-- **Endereço**: Rua 21 de Abril, 272 – Edifício Brasiluso, Sala 212 – Centro, Campos dos Goytacazes – RJ, CEP 28010-170
-- **Telefone**: (22) 3025-7633
-- **Email**: omega@omegacsa.com.br
+- **Endereço**: Centro Administrativo — Rua 21 de Abril, 272 – Edifício Brasiluso, Sala 212 – Centro, Campos dos Goytacazes – RJ, CEP 28010-170
+- **Celular**: (22) 99964-4607 · (22) 99818-0029
+- **Email**: omega@omegacsa.com.br · omegaengenharia.csa@gmail.com
 - **WhatsApp**: (22) 99964-4607

@@ -7,15 +7,18 @@ export const SITE = {
     "Soluções integradas em engenharia para obras públicas, privadas, industriais e ambientais. Projetos, fiscalização e consultoria especializada em Campos dos Goytacazes, RJ.",
   email: "omega@omegacsa.com.br",
   emailAlt: "omegaengenharia.csa@gmail.com",
-  phone: "(22) 3025-7633",
-  phoneAlt: "(22) 99964-4607",
+  phone: "(22) 99964-4607",
+  phoneAlt: "(22) 99818-0029",
+  phoneTel: "+5522999644607",
+  phoneAltTel: "+55229998180029",
   address: {
-    street: "Rua Cel. Pache Faria, 213",
-    neighborhood: "Pq. Nova Brasília",
+    name: "Centro Administrativo",
+    street: "Rua 21 de Abril, 272 — Edifício Brasiluso, Sala 212",
+    neighborhood: "Centro",
     city: "Campos dos Goytacazes",
     state: "RJ",
-    cep: "28.055-230",
-    full: "Rua Cel. Pache Faria, 213 — Pq. Nova Brasília, Campos dos Goytacazes — RJ",
+    cep: "28010-170",
+    full: "Centro Administrativo — Rua 21 de Abril, 272 — Edifício Brasiluso, Sala 212 — Centro — Campos dos Goytacazes — RJ — CEP 28010-170",
   },
   supportOffices: ["Carapebus", "Nova Iguaçu", "São Francisco de Itabapoana"],
   social: {
@@ -23,9 +26,8 @@ export const SITE = {
   },
   team: {
     engineer: {
-      name: "Maxuel Bernardes Donato",
+      name: "Maxuel B. Donato",
       role: "Diretor Técnico / Administrativo",
-      crea: "2009101529",
       titles: [
         "Engenheiro Civil",
         "Engenheiro de Segurança do Trabalho",

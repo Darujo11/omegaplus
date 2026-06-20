@@ -292,35 +292,7 @@ export default function SobrePage() {
                 {SITE.team.engineer.name}
               </h3>
 
-              {/* CREA badge */}
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  padding: "4px 12px",
-                  borderRadius: "100px",
-                  background: "rgba(90, 158, 47, 0.1)",
-                  border: "1px solid rgba(90, 158, 47, 0.2)",
-                  marginBottom: "24px",
-                  marginTop: "8px",
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: "var(--font-code)",
-                    fontSize: "10px",
-                    fontWeight: "500",
-                    color: "#5a9e2f",
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  CREA/RJ {SITE.team.engineer.crea}
-                </span>
-              </div>
-
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginTop: "20px" }}>
                 {SITE.team.engineer.titles.map((title) => (
                   <div key={title} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
                     <div

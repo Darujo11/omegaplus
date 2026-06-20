@@ -90,7 +90,7 @@ export default function Footer() {
             </h4>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               <a
-                href={`tel:${SITE.phone}`}
+                href={`tel:${SITE.phoneTel}`}
                 style={{
                   display: "flex",
                   alignItems: "flex-start",
@@ -102,6 +102,20 @@ export default function Footer() {
               >
                 <Phone size={14} style={{ marginTop: "2px", flexShrink: 0, color: "#1a7fc1" }} />
                 {SITE.phone}
+              </a>
+              <a
+                href={`tel:${SITE.phoneAltTel}`}
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "10px",
+                  fontSize: "14px",
+                  color: "#6b7d96",
+                  textDecoration: "none",
+                }}
+              >
+                <Phone size={14} style={{ marginTop: "2px", flexShrink: 0, color: "#1a7fc1" }} />
+                {SITE.phoneAlt}
               </a>
               <a
                 href={`mailto:${SITE.email}`}
@@ -116,6 +130,20 @@ export default function Footer() {
               >
                 <Mail size={14} style={{ marginTop: "2px", flexShrink: 0, color: "#1a7fc1" }} />
                 {SITE.email}
+              </a>
+              <a
+                href={`mailto:${SITE.emailAlt}`}
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "10px",
+                  fontSize: "14px",
+                  color: "#6b7d96",
+                  textDecoration: "none",
+                }}
+              >
+                <Mail size={14} style={{ marginTop: "2px", flexShrink: 0, color: "#1a7fc1" }} />
+                {SITE.emailAlt}
               </a>
               <div
                 style={{ display: "flex", alignItems: "flex-start", gap: "10px", fontSize: "14px", color: "#6b7d96" }}

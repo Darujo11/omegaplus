@@ -21,7 +21,7 @@ Através de um sistema de gestão continuamente melhorado visando:
 
 ## Responsável Técnico
 
-**Maxuel Bernardes Donato**
+**Maxuel B. Donato**
 
 - Engenheiro Civil
 - Engenheiro de Segurança do Trabalho
@@ -31,7 +31,6 @@ Através de um sistema de gestão continuamente melhorado visando:
 - Engenheiro de Cartografia Esp.
 - MSc. Engenharia Ambiental Profissional — Recursos Hídricos
 - Doutorando em Modelagem e Tecnologia em Recursos Hídricos
-- **CREA/RJ:** 2009101529
 
 ---
 
@@ -45,17 +44,17 @@ Diretora Chefe — Omega Engenharia CSA Ltda.
 ## Contato e Endereço
 
 **Sede:**
-Rua Cel. Pache Faria, 213 — Pq. Nova Brasília
-Campos dos Goytacazes — RJ
-CEP 28.055-230
+Centro Administrativo — Rua 21 de Abril, 272 — Edifício Brasiluso, Sala 212
+Centro — Campos dos Goytacazes — RJ
+CEP 28010-170
 
 **Escritórios de Apoio:**
 - Carapebus
 - Nova Iguaçu
 - São Francisco de Itabapoana
 
-**Telefones:** (22) 3025.7633 — (22) 99964.4607
-**E-mail:** omegaengenharia.csa@gmail.com
+**Celulares:** (22) 99964-4607 — (22) 99818-0029
+**E-mail:** omega@omegacsa.com.br — omegaengenharia.csa@gmail.com
 
 ---
 
@@ -247,7 +246,7 @@ Projetos de intervenção em sistemas de micro e macro drenagem para controle de
 - Código ART: 2020250366269
 - Documento: Anexo II — Folha 01/01
 
-**Autor do Projeto:** Maxuel Bernardes Donato
+**Autor do Projeto:** Maxuel B. Donato
 - Engenheiro Civil
 - Engenheiro de Segurança do Trabalho
 - Engenheiro Sanitarista e Ambiental Esp.
@@ -256,13 +255,12 @@ Projetos de intervenção em sistemas de micro e macro drenagem para controle de
 - Engenheiro de Cartografia Esp.
 - MSc. Engenharia Ambiental Profissional — Recursos Hídricos
 - Doutorando em Modelagem e Tecnologia em Recursos Hídricos
-- CREA: 2009101529
 
 **Endereço da Intervenção:**
 Omega Engenharia CSA Ltda.
-Rua Coronel Pache Faria, 213 — Campos-RJ — CEP 28.230-000
-Tel: (22) 3025.7633 — 99964.4607
-E-mail: omegaengenharia.csa@gmail.com
+Centro Administrativo — Rua 21 de Abril, 272 — Edifício Brasiluso, Sala 212 — Centro — Campos dos Goytacazes — RJ — CEP 28010-170
+Tel: (22) 99964-4607 — (22) 99818-0029
+E-mail: omega@omegacsa.com.br — omegaengenharia.csa@gmail.com
 
 ---
 
