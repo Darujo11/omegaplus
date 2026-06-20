@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { NAV_LINKS, SITE } from "@/lib/site-data";
@@ -19,9 +19,10 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  // Fecha ao navegar
-  useEffect(() => {
+  // Fecha menu mobile e libera scroll do body antes da pintura da nova pagina
+  useLayoutEffect(() => {
     setMobileOpen(false);
+    document.body.style.overflow = "";
   }, [pathname]);
 
   // Trava scroll do body quando menu mobile está aberto
@@ -219,6 +220,10 @@ export default function Header() {
                     >
                       <Link
                         href={link.href}
+                        onClick={() => {
+                          setMobileOpen(false);
+                          document.body.style.overflow = "";
+                        }}
                         style={{
                           display: "flex",
                           alignItems: "center",
