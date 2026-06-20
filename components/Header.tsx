@@ -53,7 +53,7 @@ export default function Header() {
             maxWidth: "1200px",
             margin: "0 auto",
             padding: "0 clamp(16px, 4vw, 24px)",
-            height: "clamp(64px, 12vw, 82px)",
+            height: "clamp(68px, 12vw, 88px)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -68,7 +68,7 @@ export default function Header() {
               height={102}
               priority
               style={{
-                height: "clamp(40px, 7vw, 54px)",
+                height: "clamp(44px, 7.5vw, 60px)",
                 width: "auto",
                 mixBlendMode: "screen",
               }}

@@ -32,7 +32,7 @@ export default function Footer() {
                 width={220}
                 height={102}
                 style={{
-                  height: "clamp(52px, 8vw, 64px)",
+                  height: "clamp(56px, 8.5vw, 70px)",
                   width: "auto",
                   mixBlendMode: "screen",
                 }}
