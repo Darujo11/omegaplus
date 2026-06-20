@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedStats from "@/components/AnimatedStats";
 import AreasSection from "@/components/AreasSection";
+import GoogleMapEmbed from "@/components/GoogleMapEmbed";
 import PortfolioPreviewSection from "@/components/PortfolioPreviewSection";
 import HeroAreaNav from "@/components/HeroAreaNav";
 import { SITE, AREAS } from "@/lib/site-data";
@@ -14,6 +15,8 @@ export const metadata: Metadata = {
 };
 
 const tickerItems = AREAS.map((a) => a.title);
+
+const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SITE.address.mapsQuery)}`;
 
 const LOGOS = [
   "/aprovadosporquemusa/1.jpg",
@@ -238,32 +241,32 @@ export default function HomePage() {
             <HeroAreaNav items={AREAS.slice(6)} side="right" />
           </div>
 
-          {/* CTA principal — centralizada embaixo */}
+          {/* CTA principal — alinhada à coluna esquerda (borda nos ícones) */}
           <AnimatedSection delay={0.7}>
-            <div
-              className="hero-actions"
-              style={{ gap: "14px", marginTop: "clamp(22px,4vh,38px)", justifyContent: "center" }}
-            >
-              <Link
-                href="/contato"
-                className="btn-ghost-hover"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  padding: "14px 28px",
-                  borderRadius: "10px",
-                  fontSize: "14px",
-                  fontWeight: "700",
-                  textDecoration: "none",
-                  background: "linear-gradient(135deg, #1a7fc1 0%, #0d5a8a 100%)",
-                  color: "#fff",
-                  boxShadow: "0 8px 32px rgba(26,127,193,0.3), inset 0 1px 0 rgba(255,255,255,0.1)",
-                  letterSpacing: "0.01em",
-                }}
-              >
-                Solicitar Orçamento <ArrowRight size={15} />
-              </Link>
+            <div className="hero-cta-split" style={{ marginTop: "clamp(22px,4vh,38px)" }}>
+              <div className="hero-cta-slot">
+                <Link
+                  href="/contato"
+                  className="btn-ghost-hover"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    padding: "14px 28px",
+                    borderRadius: "10px",
+                    fontSize: "14px",
+                    fontWeight: "700",
+                    textDecoration: "none",
+                    background: "linear-gradient(135deg, #1a7fc1 0%, #0d5a8a 100%)",
+                    color: "#fff",
+                    boxShadow: "0 8px 32px rgba(26,127,193,0.3), inset 0 1px 0 rgba(255,255,255,0.1)",
+                    letterSpacing: "0.01em",
+                  }}
+                >
+                  Solicitar Orçamento <ArrowRight size={15} />
+                </Link>
+              </div>
+              <div className="hero-cta-spacer" aria-hidden />
             </div>
           </AnimatedSection>
         </div>
@@ -456,6 +459,91 @@ export default function HomePage() {
           ))}
         </div>
       </div>
+
+      {/* ── LOCALIZAÇÃO ── */}
+      <section
+        style={{
+          padding: "clamp(64px, 8vw, 88px) clamp(16px, 4vw, 24px)",
+          background: "#0d1526",
+          borderTop: "1px solid #1a2d4a",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "1200px",
+            margin: "0 auto",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))",
+            gap: "clamp(28px, 5vw, 48px)",
+            alignItems: "center",
+          }}
+        >
+          <AnimatedSection>
+            <div className="accent-line" style={{ marginBottom: "16px" }} />
+            <span
+              style={{
+                fontFamily: "var(--font-code)",
+                fontSize: "11px",
+                fontWeight: "500",
+                color: "#1a7fc1",
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                display: "block",
+                marginBottom: "14px",
+              }}
+            >
+              Onde estamos
+            </span>
+            <h2
+              className="display-heading"
+              style={{
+                fontSize: "var(--text-2xl)",
+                fontWeight: "700",
+                color: "#e8edf5",
+                letterSpacing: "-0.04em",
+                lineHeight: "1.1",
+                marginBottom: "16px",
+              }}
+            >
+              Visite nossa sede
+            </h2>
+            <p
+              style={{
+                fontSize: "15px",
+                color: "#6b7d96",
+                lineHeight: "1.7",
+                maxWidth: "48ch",
+                marginBottom: "20px",
+              }}
+            >
+              {SITE.address.full}
+            </p>
+            <Link
+              href={mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                fontFamily: "var(--font-code)",
+                fontSize: "12px",
+                fontWeight: "500",
+                color: "#3d9fd8",
+                textDecoration: "none",
+                letterSpacing: "0.06em",
+                textTransform: "uppercase",
+              }}
+            >
+              Abrir no Google Maps <ExternalLink size={14} />
+            </Link>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.12}>
+            <GoogleMapEmbed height={320} />
+          </AnimatedSection>
+        </div>
+      </section>
 
       {/* ── CTA ── */}
       <section

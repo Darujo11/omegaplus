@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import { MapPin, Phone, Mail, MessageSquare, Building2 } from "lucide-react";
+import Link from "next/link";
+import { MapPin, Phone, Mail, MessageSquare, Building2, ExternalLink } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
+import GoogleMapEmbed from "@/components/GoogleMapEmbed";
 import ContactForm from "./ContactForm";
 import { SITE } from "@/lib/site-data";
+
+const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SITE.address.mapsQuery)}`;
 
 export const metadata: Metadata = {
   title: "Contato",
@@ -45,7 +49,7 @@ const contactInfo = [
     icon: <MapPin size={18} />,
     label: "Endereço",
     value: SITE.address.full,
-    href: `https://maps.google.com?q=${encodeURIComponent(SITE.address.full)}`,
+    href: mapsUrl,
   },
 ];
 
@@ -224,6 +228,77 @@ export default function ContatoPage() {
             </h2>
             <ContactForm />
           </div>
+        </AnimatedSection>
+      </section>
+
+      {/* Mapa */}
+      <section
+        style={{
+          padding: "0 clamp(16px, 4vw, 24px) clamp(56px, 8vw, 80px)",
+          maxWidth: "1200px",
+          margin: "0 auto",
+        }}
+      >
+        <AnimatedSection delay={0.2}>
+          <div className="accent-line" style={{ marginBottom: "16px" }} />
+          <span
+            style={{
+              fontFamily: "var(--font-code)",
+              fontSize: "11px",
+              fontWeight: "500",
+              color: "#1a7fc1",
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              display: "block",
+              marginBottom: "14px",
+            }}
+          >
+            Onde estamos
+          </span>
+          <h2
+            className="display-heading"
+            style={{
+              fontSize: "var(--text-xl)",
+              fontWeight: "700",
+              color: "#e8edf5",
+              letterSpacing: "-0.03em",
+              marginBottom: "12px",
+            }}
+          >
+            Nossa sede
+          </h2>
+          <p
+            style={{
+              fontSize: "15px",
+              color: "#6b7d96",
+              lineHeight: "1.7",
+              maxWidth: "62ch",
+              marginBottom: "24px",
+            }}
+          >
+            {SITE.address.full}
+          </p>
+          <GoogleMapEmbed height={420} />
+          <Link
+            href={mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              marginTop: "16px",
+              fontFamily: "var(--font-code)",
+              fontSize: "12px",
+              fontWeight: "500",
+              color: "#3d9fd8",
+              textDecoration: "none",
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+            }}
+          >
+            Abrir no Google Maps <ExternalLink size={14} />
+          </Link>
         </AnimatedSection>
       </section>
     </>

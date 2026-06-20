@@ -19,6 +19,8 @@ export const SITE = {
     state: "RJ",
     cep: "28010-170",
     full: "Centro Administrativo — Rua 21 de Abril, 272 — Edifício Brasiluso, Sala 212 — Centro — Campos dos Goytacazes — RJ — CEP 28010-170",
+    mapsQuery:
+      "Rua 21 de Abril, 272, Edifício Brasiluso, Sala 212, Centro, Campos dos Goytacazes, RJ, 28010-170",
   },
   supportOffices: ["Carapebus", "Nova Iguaçu", "São Francisco de Itabapoana"],
   social: {
