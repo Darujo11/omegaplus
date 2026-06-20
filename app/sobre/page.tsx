@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { CheckCircle2, Target, Eye, Shield, GraduationCap, User, Scale, Users } from "lucide-react";
+import { CheckCircle2, Target, Eye, Shield, Users } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import { SITE } from "@/lib/site-data";
 
@@ -27,6 +28,34 @@ const qualityCommitments = [
   "Melhoria contínua de nossos serviços e produtos",
   "Possuímos atestados de capacidade técnica e referências comerciais de nossos serviços",
 ];
+
+const affiliationLogoBox: React.CSSProperties = {
+  width: "clamp(88px, 18vw, 108px)",
+  height: "clamp(88px, 18vw, 108px)",
+  padding: "10px",
+  borderRadius: "12px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  lineHeight: 0,
+  flexShrink: 0,
+  boxSizing: "border-box",
+};
+
+const teamIconBox: React.CSSProperties = {
+  width: "64px",
+  height: "64px",
+  borderRadius: "12px",
+  background: "rgba(255,255,255,0.94)",
+  border: "1px solid rgba(255,255,255,0.12)",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: "8px",
+  marginBottom: "20px",
+  flexShrink: 0,
+  boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
+};
 
 const values = [
   {
@@ -101,7 +130,7 @@ export default function SobrePage() {
               maxWidth: "620px",
             }}
           >
-            A <strong style={{ color: "#8a9ab0" }}>Omega Engenharia CSA Ltda.</strong> realiza projetos, planejamento, gerenciamentos, fiscalização de serviços e perícias com ênfase nas áreas de Engenharia Civil Sanitária, Ambiental, Judicial/Pericial, Avaliações e Segurança do Trabalho.
+            A <strong style={{ color: "#8a9ab0" }}>Omega Engenharia CSA Ltda.</strong> realiza projetos, planejamento, gerenciamentos, fiscalização de serviços e perícias com ênfase nas áreas de Engenharia Civil, Sanitária, Ambiental, Elétrica, Cartografia, Judicial/Pericial, Avaliações e Segurança do Trabalho.
           </p>
         </AnimatedSection>
       </section>
@@ -141,9 +170,101 @@ export default function SobrePage() {
               <p style={{ fontSize: "15px", color: "#6b7d96", lineHeight: "1.85", marginBottom: "16px" }}>
                 Sediada em Campos dos Goytacazes, coração do Norte Fluminense, a Omega CSA Engenharia combina conhecimentos técnicos e científicos para projetar, construir e explorar estruturas, sistemas e processos que correspondam a objetivos específicos e satisfaçam critérios de excelência.
               </p>
-              <p style={{ fontSize: "15px", color: "#6b7d96", lineHeight: "1.85" }}>
+              <p style={{ fontSize: "15px", color: "#6b7d96", lineHeight: "1.85", marginBottom: "16px" }}>
                 Contamos com escritórios de apoio em <strong style={{ color: "#8a9ab0" }}>Carapebus</strong>, <strong style={{ color: "#8a9ab0" }}>Nova Iguaçu</strong> e <strong style={{ color: "#8a9ab0" }}>São Francisco de Itabapoana</strong>, ampliando nossa capacidade de atendimento em toda a região.
               </p>
+
+              <div
+                style={{
+                  marginTop: "32px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "clamp(16px, 3vw, 24px)",
+                  padding: "clamp(18px, 3vw, 24px)",
+                  borderRadius: "14px",
+                  background: "linear-gradient(135deg, rgba(26,127,193,0.07) 0%, rgba(8,14,26,0.55) 100%)",
+                  border: "1px solid rgba(26, 127, 193, 0.18)",
+                  maxWidth: "560px",
+                  flexWrap: "wrap",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "12px",
+                    flexShrink: 0,
+                  }}
+                >
+                  <div
+                    style={{
+                      ...affiliationLogoBox,
+                      background: "#080e1a",
+                      border: "1px solid #1a2d4a",
+                    }}
+                  >
+                    <Image
+                      src="/icones/crea.png"
+                      alt="CREA-RJ — Conselho Regional de Engenharia e Agronomia do Rio de Janeiro"
+                      width={88}
+                      height={88}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
+                        display: "block",
+                      }}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      ...affiliationLogoBox,
+                      background: "rgba(255,255,255,0.94)",
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
+                    }}
+                  >
+                    <Image
+                      src="/icones/inea.jpeg"
+                      alt="INEA — Instituto Estadual do Ambiente do Rio de Janeiro"
+                      width={88}
+                      height={88}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
+                        display: "block",
+                      }}
+                    />
+                  </div>
+                </div>
+                <div style={{ minWidth: "min(100%, 220px)", flex: "1 1 200px" }}>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-code)",
+                      fontSize: "10px",
+                      fontWeight: "500",
+                      color: "#1a7fc1",
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      display: "block",
+                      marginBottom: "6px",
+                    }}
+                  >
+                    Registro e licenciamento
+                  </span>
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      color: "#8a9ab0",
+                      lineHeight: "1.55",
+                      margin: 0,
+                    }}
+                  >
+                    Profissionais habilitados no CREA-RJ e atuação integrada com o Instituto Estadual do Ambiente (INEA) do Rio de Janeiro.
+                  </p>
+                </div>
+              </div>
             </AnimatedSection>
 
             <AnimatedSection delay={0.15}>
@@ -248,21 +369,14 @@ export default function SobrePage() {
                   background: "radial-gradient(circle, rgba(26, 127, 193, 0.08) 0%, transparent 70%)",
                 }}
               />
-              <div
-                style={{
-                  width: "52px",
-                  height: "52px",
-                  borderRadius: "12px",
-                  background: "rgba(26, 127, 193, 0.1)",
-                  border: "1px solid rgba(26, 127, 193, 0.2)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "#1a7fc1",
-                  marginBottom: "20px",
-                }}
-              >
-                <GraduationCap size={24} />
+              <div style={teamIconBox}>
+                <Image
+                  src="/icones/simboloengenharia.webp"
+                  alt="Símbolo da engenharia"
+                  width={48}
+                  height={48}
+                  style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                />
               </div>
 
               <span
@@ -324,21 +438,14 @@ export default function SobrePage() {
                 height: "100%",
               }}
             >
-              <div
-                style={{
-                  width: "52px",
-                  height: "52px",
-                  borderRadius: "12px",
-                  background: "rgba(26, 127, 193, 0.1)",
-                  border: "1px solid rgba(26, 127, 193, 0.2)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "#1a7fc1",
-                  marginBottom: "20px",
-                }}
-              >
-                <User size={24} />
+              <div style={teamIconBox}>
+                <Image
+                  src="/icones/contabilidade.jpg"
+                  alt="Símbolo da contabilidade"
+                  width={48}
+                  height={48}
+                  style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                />
               </div>
 
               <span
@@ -384,21 +491,14 @@ export default function SobrePage() {
                 height: "100%",
               }}
             >
-              <div
-                style={{
-                  width: "52px",
-                  height: "52px",
-                  borderRadius: "12px",
-                  background: "rgba(26, 127, 193, 0.1)",
-                  border: "1px solid rgba(26, 127, 193, 0.2)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "#1a7fc1",
-                  marginBottom: "20px",
-                }}
-              >
-                <Scale size={24} />
+              <div style={teamIconBox}>
+                <Image
+                  src="/icones/advocacia.jpg"
+                  alt="Símbolo da advocacia"
+                  width={48}
+                  height={48}
+                  style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                />
               </div>
 
               <span
@@ -556,42 +656,14 @@ export default function SobrePage() {
             </p>
           </AnimatedSection>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))",
-              gap: "12px",
-            }}
-          >
+          <div className="quality-grid">
             {qualityCommitments.map((item, i) => (
-              <AnimatedSection key={i} delay={(i % 3) * 0.07}>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: "14px",
-                    padding: "20px 22px",
-                    borderRadius: "12px",
-                    background: "#080e1a",
-                    border: "1px solid #1a2d4a",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "28px",
-                      height: "28px",
-                      borderRadius: "8px",
-                      background: "rgba(90, 158, 47, 0.1)",
-                      border: "1px solid rgba(90, 158, 47, 0.2)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                    }}
-                  >
+              <AnimatedSection key={item} delay={(i % 2) * 0.07} className="quality-grid-item">
+                <div className="quality-card">
+                  <div className="quality-card-icon">
                     <CheckCircle2 size={14} style={{ color: "#5a9e2f" }} />
                   </div>
-                  <span style={{ fontSize: "14px", color: "#8a9ab0", lineHeight: "1.6" }}>{item}</span>
+                  <span className="quality-card-text">{item}</span>
                 </div>
               </AnimatedSection>
             ))}

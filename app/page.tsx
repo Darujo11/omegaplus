@@ -59,7 +59,7 @@ export default function HomePage() {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            filter: "brightness(0.82) saturate(1.05)",
+            filter: "brightness(0.92) saturate(1.08)",
           }}
         >
           <source src="/video_hero/videoback.mp4" type="video/mp4" />
@@ -72,7 +72,7 @@ export default function HomePage() {
             position: "absolute",
             inset: 0,
             zIndex: 1,
-            background: "rgba(8,14,26,0.42)",
+            background: "rgba(8,14,26,0.28)",
             mixBlendMode: "multiply",
             pointerEvents: "none",
           }}
@@ -82,7 +82,7 @@ export default function HomePage() {
         <div
           className="blueprint-bg"
           aria-hidden
-          style={{ position: "absolute", inset: 0, zIndex: 1, opacity: 0.28 }}
+          style={{ position: "absolute", inset: 0, zIndex: 1, opacity: 0.18 }}
         />
 
         {/* Primary gradient: escurece à esquerda, abre o vídeo à direita */}
@@ -93,7 +93,7 @@ export default function HomePage() {
             inset: 0,
             zIndex: 2,
             background:
-              "linear-gradient(90deg, rgba(8,14,26,0.97) 0%, rgba(8,14,26,0.93) 28%, rgba(8,14,26,0.5) 50%, rgba(8,14,26,0.93) 72%, rgba(8,14,26,0.97) 100%)",
+              "linear-gradient(90deg, rgba(8,14,26,0.90) 0%, rgba(8,14,26,0.82) 28%, rgba(8,14,26,0.38) 50%, rgba(8,14,26,0.82) 72%, rgba(8,14,26,0.90) 100%)",
           }}
         />
 
@@ -107,7 +107,7 @@ export default function HomePage() {
             right: 0,
             height: "clamp(140px, 20vw, 220px)",
             zIndex: 3,
-            background: "linear-gradient(to bottom, rgba(8,14,26,0.75) 0%, transparent 100%)",
+            background: "linear-gradient(to bottom, rgba(8,14,26,0.58) 0%, transparent 100%)",
             pointerEvents: "none",
           }}
         />
@@ -122,7 +122,7 @@ export default function HomePage() {
             right: 0,
             height: "clamp(180px, 22vw, 260px)",
             zIndex: 3,
-            background: "linear-gradient(to top, rgba(8,14,26,0.95) 0%, transparent 100%)",
+            background: "linear-gradient(to top, rgba(8,14,26,0.82) 0%, transparent 100%)",
             pointerEvents: "none",
           }}
         />
