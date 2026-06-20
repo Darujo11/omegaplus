@@ -237,32 +237,32 @@ export default function HomePage() {
             <HeroAreaNav items={AREAS.slice(6)} side="right" />
           </div>
 
-          {/* CTA principal — centralizada embaixo */}
+          {/* CTA principal — alinhada à coluna esquerda (borda nos ícones) */}
           <AnimatedSection delay={0.7}>
-            <div
-              className="hero-actions"
-              style={{ gap: "14px", marginTop: "clamp(22px,4vh,38px)", justifyContent: "center" }}
-            >
-              <Link
-                href="/contato"
-                className="btn-ghost-hover"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  padding: "14px 28px",
-                  borderRadius: "10px",
-                  fontSize: "14px",
-                  fontWeight: "700",
-                  textDecoration: "none",
-                  background: "linear-gradient(135deg, #1a7fc1 0%, #0d5a8a 100%)",
-                  color: "#fff",
-                  boxShadow: "0 8px 32px rgba(26,127,193,0.3), inset 0 1px 0 rgba(255,255,255,0.1)",
-                  letterSpacing: "0.01em",
-                }}
-              >
-                Solicitar Orçamento <ArrowRight size={15} />
-              </Link>
+            <div className="hero-cta-split" style={{ marginTop: "clamp(22px,4vh,38px)" }}>
+              <div className="hero-cta-slot">
+                <Link
+                  href="/contato"
+                  className="btn-ghost-hover"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    padding: "14px 28px",
+                    borderRadius: "10px",
+                    fontSize: "14px",
+                    fontWeight: "700",
+                    textDecoration: "none",
+                    background: "linear-gradient(135deg, #1a7fc1 0%, #0d5a8a 100%)",
+                    color: "#fff",
+                    boxShadow: "0 8px 32px rgba(26,127,193,0.3), inset 0 1px 0 rgba(255,255,255,0.1)",
+                    letterSpacing: "0.01em",
+                  }}
+                >
+                  Solicitar Orçamento <ArrowRight size={15} />
+                </Link>
+              </div>
+              <div className="hero-cta-spacer" aria-hidden />
             </div>
           </AnimatedSection>
         </div>

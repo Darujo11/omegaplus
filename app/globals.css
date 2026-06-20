@@ -509,6 +509,35 @@ body::after {
   flex-wrap: wrap;
 }
 
+/* CTA alinhada à coluna esquerda do split (borda do botão nos ícones) */
+.hero-cta-split {
+  display: flex;
+  justify-content: center;
+  gap: clamp(40px, 12vw, 200px);
+  width: 100%;
+}
+.hero-cta-slot {
+  width: clamp(240px, 24vw, 300px);
+  display: flex;
+  justify-content: flex-start;
+  /* alinha a borda esquerda do botao com o badge do link */
+  padding-left: 7px;
+}
+.hero-cta-spacer {
+  width: clamp(240px, 24vw, 300px);
+}
+@media (max-width: 860px) {
+  .hero-cta-split {
+    gap: 0;
+  }
+  .hero-cta-slot {
+    width: 100%;
+  }
+  .hero-cta-spacer {
+    display: none;
+  }
+}
+
 @media (max-width: 600px) {
   .hero-actions > * {
     flex: 1 1 100%;
