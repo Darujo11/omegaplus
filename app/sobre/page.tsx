@@ -6,9 +6,9 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { SITE } from "@/lib/site-data";
 
 export const metadata: Metadata = {
-  title: "A Empresa",
+  title: { absolute: "Sobre a Omega CSA Engenharia — Campos dos Goytacazes, RJ" },
   description:
-    "Conheça a Omega CSA Engenharia — empresa especializada em engenharia civil, sanitária, ambiental, geotécnica, elétrica e segurança do trabalho em Campos dos Goytacazes, RJ.",
+    "Empresa de engenharia multidisciplinar em Campos dos Goytacazes, RJ: civil, sanitária, ambiental, geotécnica, elétrica e segurança do trabalho. CREA-RJ.",
 };
 
 const differentials = [

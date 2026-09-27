@@ -28,7 +28,7 @@ import ClientsFilter from "./ClientsFilter";
 export const metadata: Metadata = {
   title: "Portfólio Técnico",
   description:
-    "Portfólio técnico da Omega CSA Engenharia: 11 especialidades integradas, consultoria em aterros sanitários, obras de saneamento, drenagem e urbanização, e clientes como Grupo Realiza, MRV, Alphaville, Águas do Brasil e prefeituras do RJ.",
+    "Aterros sanitários, saneamento, drenagem e urbanização: projetos da Omega CSA Engenharia para MRV, Alphaville, Águas do Brasil e prefeituras do RJ.",
 };
 
 const jsonLd = breadcrumbJsonLd([

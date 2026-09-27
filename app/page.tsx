@@ -229,7 +229,7 @@ export default function HomePage() {
                   opacity: 0.85,
                 }}
               >
-                Explore nossas soluções
+                {AREAS.length} áreas de atuação
               </span>
               <h1
                 className="display-heading"
@@ -239,10 +239,13 @@ export default function HomePage() {
                   color: "#e8edf5",
                   lineHeight: "1.1",
                   letterSpacing: "-0.035em",
-                  margin: 0,
+                  margin: "0 auto",
+                  // Duas linhas equilibradas no desktop (text-wrap: balance da
+                  // .display-heading); em em, acompanha a escala fluida.
+                  maxWidth: "15em",
                 }}
               >
-                Áreas de atuação em engenharia
+                Engenharia multidisciplinar em Campos dos Goytacazes
               </h1>
             </div>
           </div>

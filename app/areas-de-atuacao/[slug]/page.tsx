@@ -19,7 +19,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
-import { AREAS, WHATSAPP_URL } from "@/lib/site-data";
+import { AREAS, SITE, WHATSAPP_URL } from "@/lib/site-data";
 import { areaJsonLd, breadcrumbJsonLd } from "@/lib/structured-data";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -32,9 +32,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const area = AREAS.find((a) => a.slug === slug);
   if (!area) return {};
+  // Título absoluto com marca curta: "palavra-chave + cidade" cabe nos ~60
+  // caracteres que o Google exibe. O H1 da página mantém o nome completo da área.
   return {
-    title: area.title,
-    description: `${area.shortDesc} — Omega CSA Engenharia, Campos dos Goytacazes, RJ.`,
+    title: { absolute: `${area.seoTitle} | ${SITE.shortName}` },
+    description: `${area.shortDesc} Em Campos dos Goytacazes e todo o RJ. Orçamento pelo WhatsApp.`,
   };
 }
 

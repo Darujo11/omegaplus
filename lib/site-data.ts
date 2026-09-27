@@ -80,6 +80,7 @@ export const AREAS = [
   {
     slug: "engenharia-civil",
     title: "Engenharia Civil, Arquitetura e Urbanismo",
+    seoTitle: "Engenharia Civil e Arquitetura em Campos-RJ",
     shortDesc: "Projetos civis, arquitetônicos, urbanísticos e acompanhamento técnico de obras.",
     icon: "building",
     image: "/icones/engenharia-civil.png",
@@ -103,6 +104,7 @@ export const AREAS = [
   {
     slug: "projetos-estruturais",
     title: "Projetos Estruturais",
+    seoTitle: "Projetos Estruturais em Campos-RJ",
     shortDesc: "Estruturas de concreto armado, metálicas, fundações e diagnóstico de patologias.",
     icon: "layers",
     image: "/icones/projetos-estruturais.png",
@@ -123,6 +125,7 @@ export const AREAS = [
   {
     slug: "hidrossanitaria",
     title: "Engenharia Hidrossanitária",
+    seoTitle: "Projeto Hidrossanitário em Campos-RJ",
     shortDesc: "Instalações hidráulicas, sanitárias, pluviais e sistemas de pressurização predial.",
     icon: "droplets",
     image: "/icones/hidrossanitaria.png",
@@ -142,6 +145,7 @@ export const AREAS = [
   {
     slug: "sanitaria-ambiental",
     title: "Engenharia Sanitária e Ambiental",
+    seoTitle: "Engenharia Sanitária e Ambiental em Campos-RJ",
     shortDesc: "Drenagem urbana, saneamento, ETE/ETA, licenciamento ambiental e gestão hídrica.",
     icon: "leaf",
     image: "/icones/sanitaria-ambiental.png",
@@ -175,6 +179,7 @@ export const AREAS = [
   {
     slug: "seguranca-do-trabalho",
     title: "Segurança do Trabalho",
+    seoTitle: "Segurança do Trabalho em Campos-RJ",
     shortDesc: "Engenharia de segurança, gestão de riscos, laudos de insalubridade e NRs.",
     icon: "shield",
     image: "/icones/seguranca-do-trabalho.png",
@@ -199,6 +204,7 @@ export const AREAS = [
   {
     slug: "geotecnia-barragens",
     title: "Geotecnia, Barragens e Segurança de Estruturas",
+    seoTitle: "Geotecnia e Segurança de Barragens em Campos-RJ",
     shortDesc: "Estudos geotécnicos, contenção de encostas, segurança de barragens e instrumentação.",
     icon: "mountain",
     image: "/icones/geotecnia-barragens.png",
@@ -222,6 +228,7 @@ export const AREAS = [
   {
     slug: "engenharia-mecanica",
     title: "Engenharia Mecânica",
+    seoTitle: "Engenharia Mecânica em Campos-RJ",
     shortDesc: "Projetos de bombas, equipamentos operacionais, ventilação e climatização.",
     icon: "settings",
     image: "/icones/engenharia-mecanica.png",
@@ -242,6 +249,7 @@ export const AREAS = [
   {
     slug: "cartografia-topografia",
     title: "Cartografia, Geodésia, Topografia e Geoprocessamento",
+    seoTitle: "Topografia e Georreferenciamento em Campos-RJ",
     shortDesc: "Levantamentos topográficos, georreferenciamento, drones e regularização fundiária.",
     icon: "map",
     image: "",
@@ -266,6 +274,7 @@ export const AREAS = [
   {
     slug: "avaliacoes-pericias",
     title: "Avaliações, Perícias e Inspeções",
+    seoTitle: "Laudos, Perícias e Inspeções em Campos-RJ",
     shortDesc: "Laudos técnicos, perícias judiciais, inspeção predial e vídeo inspeção robotizada.",
     icon: "search",
     image: "/icones/avaliacoes-pericias.png",
@@ -295,6 +304,7 @@ export const AREAS = [
   {
     slug: "engenharia-eletrica",
     title: "Engenharia Elétrica",
+    seoTitle: "Engenharia Elétrica em Campos-RJ",
     shortDesc: "Projetos elétricos prediais, industriais, energia solar, SPDA e eficiência energética.",
     icon: "zap",
     image: "/icones/engenharia-eletrica.png",
@@ -315,6 +325,7 @@ export const AREAS = [
   {
     slug: "modelagem-tecnologia",
     title: "Engenharia de Modelagem e Tecnologia",
+    seoTitle: "BIM, Drones e Escaneamento 3D em Campos-RJ",
     shortDesc: "BIM, escaneamento 3D a laser, drones, vídeo inspeção e modelagem hidrodinâmica.",
     icon: "cpu",
     image: "/icones/modelagem-tecnologia.png",

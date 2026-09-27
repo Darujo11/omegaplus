@@ -9,9 +9,9 @@ import { SITE, WHATSAPP_URL } from "@/lib/site-data";
 const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SITE.address.mapsQuery)}`;
 
 export const metadata: Metadata = {
-  title: "Contato",
+  title: "Contato e Orçamento",
   description:
-    "Entre em contato com a Omega CSA Engenharia. Estamos em Campos dos Goytacazes, RJ. Solicite seu orçamento.",
+    "Solicite orçamento à Omega CSA Engenharia pelo WhatsApp (22) 99964-4607 ou e-mail. Escritório no Centro de Campos dos Goytacazes, RJ.",
 };
 
 const contactInfo = [
