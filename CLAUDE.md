@@ -10,7 +10,7 @@
 | Animações | Framer Motion | `AnimatedSection` reutilizável, scroll-triggered |
 | Email | Resend | Melhor DX do mercado, free tier suficiente |
 | Ícones | Lucide React | Consistente e moderno |
-| Deploy | Vercel | Zero-config, SSL automático, edge global |
+| Deploy | VPS Monadaserver (Docker Swarm + Traefik) | Deploy automático por webhook a cada push no `main` — ver `infra/vps/` |
 
 ## Design tokens
 
@@ -97,16 +97,31 @@ RESEND_API_KEY=re_xxx    # https://resend.com/api-keys
 CONTACT_EMAIL=omega@omegacsa.com.br
 ```
 
+## Deploy (VPS Monadaserver — 167.88.42.134)
+
+Push no `main` de `Darujo11/omegaplus` → webhook (porta 9012, só IPs do GitHub) → `infra/vps/deploy.sh`: build tagueado pelo SHA, smoke test isolado, `docker stack deploy` do stack `omega` (serviço `omega_web`), verificação pelo Traefik via `BUILD_ID`.
+
+| O quê | Onde |
+|---|---|
+| Arquivos de infra (fonte da verdade) | `infra/vps/` — reinstalar com `sudo bash instalar.sh` no servidor (idempotente) |
+| Clone no servidor | `/var/www/omegaplus` (dono `deploy`) |
+| Webhook / deploy / stack | `/var/www/omegaplus-webhook/`, unit `webhook-omegaplus.service` |
+| Segredos do app | `/etc/omegaplus/app.env` (640 root:deploy) — nunca por git |
+| Segredo do webhook | `sudo sed -n 's/^WEBHOOK_SECRET=//p' /etc/default/webhook-omegaplus` |
+| Log | `/var/log/deploy-omegaplus.log` |
+| Rollback | `OMEGAPLUS_TAG=<sha-12> sudo -u deploy /var/www/omegaplus-webhook/deploy.sh` (`docker image ls omegaplus-web`) |
+
+Legado: o site antigo (`Darujo11/omega`, `webhook-omega.service`) foi desativado em 2026-09-27; imagem preservada como `omega-omega:legado-dde501d`.
+
 ## Pendências para produção
 
 1. **Fotos reais** — substituir os placeholders de portfólio por imagens reais dos projetos
 2. **Resend configurado** — cadastrar domínio `omegacsa.com.br` no Resend para enviar de `noreply@omegacsa.com.br`
-3. **Deploy Vercel** — conectar repositório + configurar env vars no painel
-4. **Domínio** — apontar DNS para Vercel
 
 ## Empresa
 
-- **Razão social**: Omega CSA Engenharia
+- **Razão social**: OMEGA ENGENHARIA CSA LTDA - EPP (`SITE.legalName`) · nome fantasia: OMEGA ENGENHARIA · marca no site: Omega CSA Engenharia
+- **CNPJ**: 19.954.004/0001-37 (`SITE.cnpj`) — rodapé, JSON-LD (`legalName` + `taxID`), `llms.txt`
 - **Endereço**: Centro Administrativo — Rua 21 de Abril, 272 – Edifício Brasiluso, Sala 212 – Centro, Campos dos Goytacazes – RJ, CEP 28010-170
 - **Celular**: (22) 99964-4607 · (22) 99818-0029
 - **Email**: omega@omegacsa.com.br · omegaengenharia.csa@gmail.com

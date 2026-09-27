@@ -1,0 +1,37 @@
+# Unit do webhook de deploy do omegacsa.com.br (repo Darujo11/omegaplus).
+# Instalada por infra/vps/instalar.sh. Reescrita a cada execução.
+[Unit]
+Description=Webhook de deploy do omegacsa.com.br (GitHub Darujo11/omegaplus -> Docker Swarm)
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Não roda como root: 'deploy' está no grupo docker, que é o que ele precisa.
+User=deploy
+Group=deploy
+SupplementaryGroups=docker
+WorkingDirectory=/var/www/omegaplus-webhook
+EnvironmentFile=/etc/default/webhook-omegaplus
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/node /var/www/omegaplus-webhook/server.mjs
+Restart=always
+RestartSec=5
+
+# Endurecimento moderado de propósito: o filho roda 'docker build' e
+# 'docker stack deploy'. Sandbox agressivo aqui vira deploy quebrado.
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=full
+ProtectKernelTunables=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+ReadWritePaths=/var/log/deploy-omegaplus.log /var/www/omegaplus
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=webhook-omegaplus
+
+[Install]
+WantedBy=multi-user.target

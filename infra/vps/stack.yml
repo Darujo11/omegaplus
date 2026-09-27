@@ -1,0 +1,68 @@
+# Stack do site omegacsa.com.br no Monadaserver (Docker Swarm + Traefik).
+#
+# Deployado por infra/vps/deploy.sh — não rode `docker stack deploy` à mão:
+# a imagem e as variáveis vêm exportadas pelo script.
+#
+# O stack se chama `omega` (e não `omegaplus`) de propósito: é o mesmo serviço
+# que já serve o domínio. Atualizar no lugar evita uma janela com dois routers
+# disputando o mesmo Host e mantém o `docker service rollback` funcionando.
+#
+# Docker 20.10 neste host: `version: "3.8"` é obrigatório (sem ela o bloco
+# deploy: inteiro é ignorado em silêncio), tmpfs só na forma longa, e nada de
+# interpolação `${VAR:?msg}` — a guarda mora no deploy.sh.
+version: "3.8"
+
+services:
+  web:
+    image: ${OMEGAPLUS_IMAGE}
+    user: "node"
+    read_only: true
+    environment:
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: "1"
+      RESEND_API_KEY: ${RESEND_API_KEY}
+      CONTACT_EMAIL: ${CONTACT_EMAIL}
+    volumes:
+      - type: tmpfs
+        target: /tmp
+        tmpfs:
+          size: 67108864
+      # Cache de ISR / otimização de imagens do Next. Efêmero por design.
+      - type: tmpfs
+        target: /app/.next/cache
+        tmpfs:
+          size: 268435456
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:3000/"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    networks:
+      - Monadanet
+    deploy:
+      replicas: 1
+      update_config:
+        order: start-first
+        failure_action: rollback
+        monitor: 30s
+      rollback_config:
+        order: start-first
+      restart_policy:
+        condition: any
+        delay: 5s
+      resources:
+        limits:
+          memory: 512M
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=Monadanet"
+        - "traefik.http.routers.omega.rule=Host(`omegacsa.com.br`) || Host(`www.omegacsa.com.br`) || Host(`omega.autozapx.com`) || Host(`omegacsa.autozapx.com`)"
+        - "traefik.http.routers.omega.entrypoints=websecure"
+        - "traefik.http.routers.omega.tls=true"
+        - "traefik.http.routers.omega.tls.certresolver=letsencryptresolver"
+        - "traefik.http.services.omega.loadbalancer.server.port=3000"
+
+networks:
+  Monadanet:
+    external: true
