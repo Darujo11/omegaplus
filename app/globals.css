@@ -248,6 +248,46 @@ body::after {
   }
 }
 
+/* Entrada da primeira dobra em CSS puro.
+   O hero não pode depender de JS para aparecer: com Framer Motion o H1 (LCP)
+   ficava em opacity 0 até a hidratação — 17,9s no Lighthouse mobile. Aqui a
+   animação começa no primeiro paint. Atraso por elemento via --hero-rise-delay;
+   deslocamento via --hero-rise-from (colunas de áreas entram pelas laterais). */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: var(--hero-rise-from, translate3d(0, 24px, 0));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-rise {
+  animation: hero-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--hero-rise-delay, 0ms) both;
+}
+
+/* Variante sem fade para o elemento de LCP (H1 do hero): o Chrome só registra
+   o LCP quando o elemento tem opacity > 0, então um fade a partir de 0 adia a
+   métrica até o fim do primeiro frame animado — e o Lighthouse soma a isso todo
+   o JS pedido até lá. Só movimento: visível desde o primeiro paint. */
+@keyframes hero-settle {
+  from { transform: translate3d(0, 14px, 0); }
+  to   { transform: none; }
+}
+
+.hero-settle {
+  animation: hero-settle 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-rise-left  { --hero-rise-from: translate3d(-16px, 0, 0); }
+.hero-rise-right { --hero-rise-from: translate3d(16px, 0, 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise, .hero-settle { animation: none; }
+}
+
 /* ─────────────────────────────────────────────────
    HERO — NAVEGAÇÃO DE ÁREAS (ícone + nome)
 ───────────────────────────────────────────────── */

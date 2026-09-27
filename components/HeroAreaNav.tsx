@@ -1,19 +1,10 @@
-"use client";
-
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { Map, ChevronRight } from "lucide-react";
 import { AREAS } from "@/lib/site-data";
 
 type Area = (typeof AREAS)[number];
-
-const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
-
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.05, delayChildren: 0.15 } },
-};
 
 function Badge({ area }: { area: Area }) {
   return (
@@ -44,28 +35,26 @@ export default function HeroAreaNav({
 }) {
   const isRight = side === "right";
 
-  const itemVariants = {
-    hidden: { opacity: 0, x: isRight ? 16 : -16 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: EASE } },
-  };
-
+  // Entrada em CSS puro (.hero-rise), sem Framer Motion: o hero é a primeira
+  // dobra, e esconder seus links até o JS hidratar atrasava o LCP em segundos.
   return (
-    <motion.nav
+    <nav
       aria-label={`Áreas de atuação${isRight ? " (continuação)" : ""}`}
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="hero-area-nav"
+      className={`hero-area-nav ${isRight ? "hero-rise-right" : "hero-rise-left"}`}
     >
-      {items.map((area) => (
-        <motion.div key={area.slug} variants={itemVariants}>
+      {items.map((area, i) => (
+        <div
+          key={area.slug}
+          className="hero-rise"
+          style={{ "--hero-rise-delay": `${150 + i * 50}ms` } as CSSProperties}
+        >
           <Link href={`/areas-de-atuacao/${area.slug}`} className="hero-area-link">
             <Badge area={area} />
             <span className="hero-area-name">{area.title}</span>
             <ChevronRight size={15} className="hero-area-chevron" aria-hidden />
           </Link>
-        </motion.div>
+        </div>
       ))}
-    </motion.nav>
+    </nav>
   );
 }

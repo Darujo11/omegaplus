@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
@@ -54,7 +55,7 @@ export default function HomePage() {
           loop
           playsInline
           preload="metadata"
-          poster="/video_hero/hero-poster.png"
+          poster="/video_hero/hero-poster.8f383935.webp"
           className="hero-video"
           style={{
             position: "absolute",
@@ -65,7 +66,10 @@ export default function HomePage() {
             filter: "brightness(0.92) saturate(1.08)",
           }}
         >
-          <source src="/video_hero/videoback.mp4" type="video/mp4" />
+          {/* Nomes com hash de conteúdo: permitem cache imutável (next.config.ts).
+              Ao trocar o vídeo, gere um arquivo novo — nunca sobrescreva. */}
+          <source src="/video_hero/hero-mobile.df0f6d47.mp4" type="video/mp4" media="(max-width: 767px)" />
+          <source src="/video_hero/hero.d997e756.mp4" type="video/mp4" />
         </video>
 
         {/* Tint navy — harmoniza o azul-claro do vídeo com a paleta dark da marca */}
@@ -146,26 +150,31 @@ export default function HomePage() {
           }}
         />
 
-        {/* Decorative Ω watermark */}
-        <div
+        {/* Decorative Ω watermark — contorno vetorial do glifo Ω da IBM Plex Sans
+            700 (fontkit), não texto: texto deste tamanho virava o elemento de
+            LCP e era repintado na troca da webfont, empurrando a métrica para
+            depois do JS. <path> não é candidato a LCP nem depende de fonte. */}
+        <svg
           aria-hidden
+          focusable="false"
+          viewBox="0 0 100 100"
           style={{
             position: "absolute",
             left: "-16px",
             bottom: "6%",
-            fontFamily: "var(--font-display)",
-            fontSize: "clamp(180px, 26vw, 360px)",
-            fontWeight: "700",
-            color: "rgba(26,127,193,0.04)",
-            lineHeight: 1,
+            width: "clamp(180px, 26vw, 360px)",
+            height: "clamp(180px, 26vw, 360px)",
             pointerEvents: "none",
-            userSelect: "none",
-            letterSpacing: "-0.05em",
             zIndex: 3,
+            overflow: "visible",
           }}
         >
-          Ω
-        </div>
+          <path
+            transform="translate(0 80) scale(0.1 -0.1)"
+            fill="rgba(26,127,193,0.04)"
+            d="M50 0L50 134L209 134L209 144Q172 161 143.5 185Q115 209 95 240.5Q75 272 65 312Q55 352 55 400Q55 465 75.5 521Q96 577 135.5 619.5Q175 662 232 686Q289 710 362 710Q435 710 492 686Q549 662 588.5 619.5Q628 577 648.5 521Q669 465 669 400Q669 352 659 312Q649 272 629 240.5Q609 209 580.5 185Q552 161 515 144L515 134L674 134L674 0L405 0L405 205Q428 212 447 226.5Q466 241 480 260.5Q494 280 501.5 303Q509 326 509 350L509 431Q509 469 491 501.5Q473 534 440.5 554.5Q408 575 362 575Q317 575 284 554.5Q251 534 233 501.5Q215 469 215 431L215 350Q215 326 222.5 303Q230 280 244 260.5Q258 241 277 226.5Q296 212 319 205L319 0Z"
+          />
+        </svg>
 
         {/* Coordinates — canto inferior direito sobre o vídeo */}
         <div
@@ -202,7 +211,10 @@ export default function HomePage() {
           }}
         >
           {/* Eyebrow + H1 compacto (SEO) — centralizado no topo */}
-          <AnimatedSection delay={0.05}>
+          {/* Entrada em CSS e sem fade, não AnimatedSection: este H1 é o LCP da
+              home, e o whileInView o mantinha em opacity 0 até o JS hidratar
+              (LCP 17,9s). Ver .hero-settle em globals.css. */}
+          <div className="hero-settle">
             <div style={{ textAlign: "center", marginBottom: "clamp(20px,4vh,40px)" }}>
               <span
                 style={{
@@ -233,7 +245,7 @@ export default function HomePage() {
                 Áreas de atuação em engenharia
               </h1>
             </div>
-          </AnimatedSection>
+          </div>
 
           {/* Duas colunas de áreas flanqueando o objeto central */}
           <div className="hero-areas-split">
@@ -242,7 +254,7 @@ export default function HomePage() {
           </div>
 
           {/* CTA principal — alinhada à coluna esquerda (borda nos ícones) */}
-          <AnimatedSection delay={0.7}>
+          <div className="hero-rise" style={{ "--hero-rise-delay": "600ms" } as CSSProperties}>
             <div className="hero-cta-split" style={{ marginTop: "clamp(22px,4vh,38px)" }}>
               <div className="hero-cta-slot">
                 <Link
@@ -268,7 +280,7 @@ export default function HomePage() {
               </div>
               <div className="hero-cta-spacer" aria-hidden />
             </div>
-          </AnimatedSection>
+          </div>
         </div>
       </section>
 
