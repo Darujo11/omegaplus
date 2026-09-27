@@ -57,11 +57,35 @@ services:
       labels:
         - "traefik.enable=true"
         - "traefik.docker.network=Monadanet"
-        - "traefik.http.routers.omega.rule=Host(`omegacsa.com.br`) || Host(`www.omegacsa.com.br`) || Host(`omega.autozapx.com`) || Host(`omegacsa.autozapx.com`)"
+        # Domínio canônico: só ele serve conteúdo.
+        - "traefik.http.routers.omega.rule=Host(`omegacsa.com.br`)"
         - "traefik.http.routers.omega.entrypoints=websecure"
         - "traefik.http.routers.omega.tls=true"
         - "traefik.http.routers.omega.tls.certresolver=letsencryptresolver"
+        - "traefik.http.routers.omega.service=omega"
         - "traefik.http.services.omega.loadbalancer.server.port=3000"
+        # www e domínios antigos: 301 para o canônico, preservando caminho e query.
+        # Um router por host (não Host(a) || Host(b)): o desafio ACME é por
+        # domínio, e DNS faltando num deles não derruba o certificado dos outros.
+        # `$$` escapa a interpolação do stack file — o Traefik precisa receber `${1}`.
+        - "traefik.http.middlewares.omega-canonico.redirectregex.regex=^https?://[^/]+(.*)$$"
+        - "traefik.http.middlewares.omega-canonico.redirectregex.replacement=https://omegacsa.com.br$${1}"
+        - "traefik.http.middlewares.omega-canonico.redirectregex.permanent=true"
+        - "traefik.http.routers.omega-www.rule=Host(`www.omegacsa.com.br`)"
+        - "traefik.http.routers.omega-www.entrypoints=websecure"
+        - "traefik.http.routers.omega-www.tls.certresolver=letsencryptresolver"
+        - "traefik.http.routers.omega-www.middlewares=omega-canonico"
+        - "traefik.http.routers.omega-www.service=omega"
+        - "traefik.http.routers.omega-legado1.rule=Host(`omega.autozapx.com`)"
+        - "traefik.http.routers.omega-legado1.entrypoints=websecure"
+        - "traefik.http.routers.omega-legado1.tls.certresolver=letsencryptresolver"
+        - "traefik.http.routers.omega-legado1.middlewares=omega-canonico"
+        - "traefik.http.routers.omega-legado1.service=omega"
+        - "traefik.http.routers.omega-legado2.rule=Host(`omegacsa.autozapx.com`)"
+        - "traefik.http.routers.omega-legado2.entrypoints=websecure"
+        - "traefik.http.routers.omega-legado2.tls.certresolver=letsencryptresolver"
+        - "traefik.http.routers.omega-legado2.middlewares=omega-canonico"
+        - "traefik.http.routers.omega-legado2.service=omega"
 
 networks:
   Monadanet:

@@ -101,3 +101,26 @@ Só entra dado real: coordenada, horário, CNPJ e perfis precisam vir da empresa
 Esta análise **não** mediu: ranking por grade geográfica (*geo-grid*: posição no pack local ponto a ponto na cidade), autoridade de domínio, perfil completo de backlinks, dados do GBP Insights, posição real no pack local, nem a existência e o estado da ficha GBP. Para isso: Local Falcon ou BrightLocal (geo-grid), Ahrefs ou Semrush (links) e o próprio painel do GBP e do Search Console.
 
 Os dois arquivos de referência da skill (`local-seo-signals.md` e `local-schema-types.md`) não estão instalados; usei o conteúdo principal da skill.
+
+---
+
+## Reauditoria — 2026-09-27, após o deploy `218ccc9`
+
+### Local SEO Score: 44/100 (+2)
+
+| Dimensão | Antes | Agora | O que mudou |
+|---|---|---|---|
+| Sinais do GBP | 8 | 8 | — |
+| Avaliações | 2 | 2 | — |
+| SEO on-page local | 13 | 13 | — |
+| NAP e citações | 9 | **10** | razão social e CNPJ visíveis no rodapé de todas as páginas: é a base para bater o cadastro com Receita, GBP, Econodata e CNPJ.biz |
+| Schema local | 6 | **7** | `legalName: "OMEGA ENGENHARIA CSA LTDA - EPP"` + `taxID: "19.954.004/0001-37"` |
+| Links e autoridade | 4 | 4 | — |
+
+**NAP de referência para todos os cadastros externos** (usar exatamente assim):
+
+> **Omega CSA Engenharia** (razão social: OMEGA ENGENHARIA CSA LTDA - EPP · CNPJ 19.954.004/0001-37)
+> Rua 21 de Abril, 272 — Edifício Brasiluso, Sala 212 — Centro — Campos dos Goytacazes — RJ — CEP 28010-170
+> (22) 99964-4607
+
+O score só sobe de verdade com os itens que dependem da empresa: ficha no Google Business Profile, avaliações, horário, coordenadas e perfis sociais (`sameAs`). O código está pronto para receber esses dados em `lib/site-data.ts` e `lib/structured-data.ts`.

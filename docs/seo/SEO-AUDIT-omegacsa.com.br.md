@@ -137,3 +137,40 @@ Meta: 400 a 700 palavras de conteúdo próprio por página. Não é para encher 
 ## O que ficou fora
 
 Tráfego orgânico, cobertura do Search Console e palavras-chave com posição (sem acesso); backlinks (sem ferramenta paga); dados de campo de Core Web Vitals (CrUX); concorrentes. Com acesso ao Search Console dá para priorizar pelas buscas que já trazem impressões.
+
+---
+
+## Reauditoria — 2026-09-27, após o deploy `218ccc9`
+
+Deploy feito pelo webhook (push → no ar em ~75 s). Mesma coleta: 18 URLs do sitemap + Lighthouse 12 mobile local contra a produção (PSI ainda sem cota).
+
+### Resolvido
+
+| Item | Antes | Agora |
+|---|---|---|
+| Performance mobile da home (mediana de 3 execuções válidas) | 58 | **74** (69 / 74 / 77) |
+| LCP da home (simulado) | 17,9 s | **4,8 a 5,6 s** |
+| Peso da home | 8,2 MB | **1,9 MB** |
+| Elemento do LCP | H1 invisível até a hidratação (atraso de 17,3 s) | H1 visível no primeiro paint |
+| Cache da mídia do hero | `max-age=0` | `max-age=31536000, immutable` |
+| Cache das imagens de `public/` | `max-age=0` | 1 dia + `stale-while-revalidate` de 7 dias |
+| CNPJ e razão social | ausentes | rodapé + JSON-LD (`legalName`, `taxID`) + `llms.txt` |
+| `/portfolio` | 91 | 91 a 92 (sem regressão) |
+
+SEO 100, Best Practices 100 e CLS 0 mantidos nas duas páginas.
+
+### Por que a produção fica abaixo da build local (82)
+
+Não é o código. **O VPS fica em Boston (EUA)**: Hostinger, AS47583. Cada requisição leva ~120 ms só para conectar e ~0,4 s até o primeiro byte, e o Lighthouse soma essa latência a cada arquivo do caminho crítico. A variância entre execuções (FCP observado de 1,5 s a 10,7 s, com uma execução sem LCP) também vem da rede, não do servidor, cujo TTFB fica estável entre 120 e 210 ms. A compressão está ativa (HTML: 202 KB → 24 KB em gzip).
+
+**Próximo ganho estrutural:** uma CDN com ponto de presença em São Paulo ou no Rio na frente do VPS (Cloudflare com proxy ligado e certificado via desafio DNS, ou Bunny), ou mover o app para um VPS no Brasil. É uma decisão de infraestrutura, fora do escopo do código.
+
+### Continua em aberto (sem mudança)
+
+- Títulos longos: cartografia-topografia (75), geotecnia-barragens (69), engenharia-civil (64); descrições de `/portfolio` (237) e `/sobre` (172).
+- H1 da home sem marca e sem cidade.
+- 11 páginas de área finas (~170 a 260 palavras com menu e rodapé).
+- `www` e `omega.autozapx.com` respondem 200 em vez de 301 (a canonical cobre).
+- Sem HSTS, `X-Content-Type-Options` e `Referrer-Policy`.
+- Sem política de privacidade (LGPD) e sem horário de atendimento.
+- A troca da webfont (IBM Plex, 4 arquivos pré-carregados) ainda é o que resta no LCP simulado.
