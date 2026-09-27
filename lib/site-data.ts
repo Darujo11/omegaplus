@@ -25,6 +25,7 @@ export const SITE = {
   supportOffices: ["Carapebus", "Nova Iguaçu", "São Francisco de Itabapoana"],
   social: {
     whatsapp: "5522999644607",
+    whatsappMessage: "[Site] - Olá, quero solicitar um orçamento.",
   },
   team: {
     engineer: {
@@ -60,6 +61,11 @@ export const SITE = {
     ],
   },
 } as const;
+
+/** Link wa.me com a mensagem padrão de orçamento já preenchida. */
+export const WHATSAPP_URL = `https://wa.me/${SITE.social.whatsapp}?text=${encodeURIComponent(
+  SITE.social.whatsappMessage,
+)}`;
 
 export const STATS = [
   { value: "15+", label: "Anos de experiência" },

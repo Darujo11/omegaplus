@@ -1,353 +1,554 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Award } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Minus, Plus } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
-import { PORTFOLIO_CATEGORIES, PORTFOLIO_PROJECTS } from "@/lib/portfolio-data";
+import { SITE, WHATSAPP_URL } from "@/lib/site-data";
+import { breadcrumbJsonLd } from "@/lib/structured-data";
+import {
+  CLIENTS,
+  FEATURED_PROJECT,
+  HERO_STATS,
+  INSTITUTIONS,
+  INSTITUTION_LOGOS,
+  LANDFILL_PHOTOS,
+  LANDFILL_SERVICES,
+  MISSION,
+  PORTFOLIO_SECTIONS,
+  SERVICE_LINES,
+  SPECIALTIES,
+  TEAM,
+  WORK_PHOTOS,
+  type Client,
+  type Photo,
+  type WorkPhoto,
+} from "@/lib/portfolio-tecnico";
+import ClientsFilter from "./ClientsFilter";
 
 export const metadata: Metadata = {
-  title: "Portfólio",
+  title: "Portfólio Técnico",
   description:
-    "Projetos executados pela Omega CSA Engenharia: urbanização, saneamento, drenagem, abastecimento de água, escolas, estradas rurais e muito mais.",
+    "Portfólio técnico da Omega CSA Engenharia: 11 especialidades integradas, consultoria em aterros sanitários, obras de saneamento, drenagem e urbanização, e clientes como Grupo Realiza, MRV, Alphaville, Águas do Brasil e prefeituras do RJ.",
 };
 
-const projects = PORTFOLIO_PROJECTS;
-const categories = [...PORTFOLIO_CATEGORIES];
+const jsonLd = breadcrumbJsonLd([
+  { name: "Início", path: "/" },
+  { name: "Portfólio", path: "/portfolio" },
+]);
+
+/* ── Primitivas locais ─────────────────────────────── */
+
+function Eyebrow({ children }: { children: React.ReactNode }) {
+  return <span className="pf-eyebrow">{children}</span>;
+}
+
+function SectionHead({ eyebrow, title, lead, as = "h2" }: { eyebrow: string; title: React.ReactNode; lead?: string; as?: "h1" | "h2" }) {
+  const Heading = as;
+  return (
+    <AnimatedSection className="pf-head">
+      <Eyebrow>{eyebrow}</Eyebrow>
+      <Heading className="display-heading pf-h2">{title}</Heading>
+      {lead && <p className="pf-lead">{lead}</p>}
+    </AnimatedSection>
+  );
+}
+
+function Watermark() {
+  return (
+    <div aria-hidden className="pf-watermark">
+      <Image src="/logo max.png" alt="" width={611} height={224} />
+    </div>
+  );
+}
+
+function Chips({ items, tone = "blue" }: { items: readonly string[]; tone?: "blue" | "green" | "plain" }) {
+  return (
+    <ul className="pf-chips">
+      {items.map((item) => (
+        <li key={item} className={`pf-chip pf-chip--${tone}`}>
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function PhotoCard({ photo, sizes, badge, className }: { photo: Photo; sizes: string; badge?: WorkPhoto["stage"]; className?: string }) {
+  return (
+    <figure className={`pf-photo ${className ?? ""}`}>
+      <div className="pf-photo-media">
+        <Image src={photo.src} alt={`${photo.title} — ${photo.caption}`} fill sizes={sizes} />
+        {badge && (
+          <span className="pf-badge" data-stage={badge.toLowerCase()}>
+            {badge}
+          </span>
+        )}
+      </div>
+      <figcaption>
+        <strong>{photo.title}</strong>
+        <span>{photo.caption}</span>
+      </figcaption>
+    </figure>
+  );
+}
+
+function ClientCard({ client }: { client: Client }) {
+  const tone = client.kind === "public" ? "green" : "blue";
+  return (
+    <article className={`pf-card pf-client ${client.wide ? "pf-client--wide" : ""}`}>
+      <span className={`pf-tag pf-tag--${tone}`}>{client.tag}</span>
+      <h3 className="pf-client-name">{client.name}</h3>
+      <p className="pf-client-loc">{client.location}</p>
+
+      {client.developments && (
+        <dl className="pf-devs">
+          {client.developments.map((d) => (
+            <div key={d.name}>
+              <dt>{d.name}</dt>
+              {d.size && <dd>{d.size}</dd>}
+            </div>
+          ))}
+        </dl>
+      )}
+
+      {client.interventions.length > 0 && (
+        <>
+          {client.developments && <p className="pf-micro">Intervenções</p>}
+          <Chips items={client.interventions} tone={tone} />
+        </>
+      )}
+
+      {client.subgroups?.map((g, i) => (
+        <div key={g.heading ?? i} className={`pf-subgroup ${g.heading ? "pf-subgroup--head" : ""}`}>
+          {g.heading && <h4>{g.heading}</h4>}
+          <dl className="pf-devs">
+            {g.developments.map((d) => (
+              <div key={d.name} className={d.name === "Total" ? "pf-devs-total" : undefined}>
+                <dt>{d.name}</dt>
+                {d.size && <dd>{d.size}</dd>}
+              </div>
+            ))}
+          </dl>
+          {g.label && <p className="pf-micro">{g.label}</p>}
+          <Chips items={g.projects} />
+        </div>
+      ))}
+
+      {client.approvedIn && (
+        <div className="pf-subgroup pf-subgroup--head">
+          <h4>Projetos para o empreendedor aprovados nos municípios</h4>
+          <Chips items={client.approvedIn} />
+        </div>
+      )}
+
+      {client.note && <p className="pf-callout">{client.note}</p>}
+    </article>
+  );
+}
+
+function ClientGroup({ label, clients }: { label: string; clients: Client[] }) {
+  return (
+    <section className="pf-client-group" aria-label={label}>
+      <h3 className="pf-group-label">{label}</h3>
+      <div className="pf-grid-2">
+        {clients.map((c) => (
+          <ClientCard key={c.name} client={c} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ── Página ────────────────────────────────────────── */
 
 export default function PortfolioPage() {
+  const privateClients = CLIENTS.filter((c) => c.kind === "private");
+  const publicClients = CLIENTS.filter((c) => c.kind === "public");
+
   return (
-    <>
-      {/* Header */}
-      <section
-        style={{
-          paddingTop: "clamp(100px, 18vh, 140px)",
-          paddingBottom: "80px",
-          paddingLeft: "clamp(16px, 4vw, 24px)",
-          paddingRight: "clamp(16px, 4vw, 24px)",
-          maxWidth: "1200px",
-          margin: "0 auto",
-          position: "relative",
-        }}
-      >
-        <div className="section-watermark">02</div>
+    <div className="pf">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-        <AnimatedSection>
-          <div className="accent-line" />
-          <span
-            style={{
-              fontFamily: "var(--font-code)",
-              fontSize: "11px",
-              fontWeight: "500",
-              color: "#1a7fc1",
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              display: "block",
-              marginBottom: "14px",
-            }}
-          >
-            Projetos realizados
-          </span>
-          <h1
-            className="display-heading"
-            style={{
-              fontSize: "var(--text-4xl)",
-              fontWeight: "700",
-              color: "#e8edf5",
-              letterSpacing: "-0.04em",
-              lineHeight: "1.05",
-              marginBottom: "24px",
-            }}
-          >
-            Nosso portfólio.
-          </h1>
-          <p
-            style={{
-              fontSize: "18px",
-              color: "#6b7d96",
-              lineHeight: "1.7",
-              maxWidth: "62ch",
-            }}
-          >
-            Projetos executados com excelência técnica, responsabilidade e comprometimento — da concepção à entrega.
-          </p>
-        </AnimatedSection>
+      {/* ── HERO ── */}
+      <section className="pf-section pf-hero">
+        <Watermark />
+        <div className="pf-container">
+          <div className="pf-hero-grid">
+            <AnimatedSection>
+              <Eyebrow>Portfólio técnico</Eyebrow>
+              <h1 className="display-heading pf-h1">
+                Engenharia multidisciplinar para{" "}
+                <span className="pf-h1-accent">saneamento, infraestrutura e meio ambiente</span>
+              </h1>
+              <p className="pf-lead">
+                A Omega Engenharia CSA Ltda., sediada em Campos dos Goytacazes/RJ, elabora projetos, planejamento,
+                gerenciamento, fiscalização de serviços e perícias nas áreas de engenharia civil, sanitária, ambiental,
+                segurança do trabalho, geotecnia, cartografia e avaliações. A mesma equipe acompanha o empreendimento
+                desde o estudo de concepção até a aprovação nos órgãos, o licenciamento e a obra.
+              </p>
+              <nav aria-label="Seções do portfólio" className="pf-jump">
+                {PORTFOLIO_SECTIONS.map((s) => (
+                  <a key={s.id} href={`#${s.id}`}>
+                    {s.label}
+                  </a>
+                ))}
+              </nav>
+            </AnimatedSection>
 
-        {/* Category pills */}
-        <AnimatedSection delay={0.15} style={{ marginTop: "40px" }}>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-            {categories.map((cat, i) => (
-              <span
-                key={cat}
-                style={{
-                  padding: "6px 16px",
-                  borderRadius: "100px",
-                  fontFamily: "var(--font-code)",
-                  fontSize: "11px",
-                  fontWeight: "500",
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  background: i === 0 ? "rgba(26, 127, 193, 0.15)" : "rgba(26, 127, 193, 0.04)",
-                  border: i === 0 ? "1px solid rgba(26, 127, 193, 0.35)" : "1px solid rgba(26, 127, 193, 0.1)",
-                  color: i === 0 ? "#3d9fd8" : "#6b7d96",
-                  cursor: "default",
-                }}
-              >
-                {cat}
-              </span>
+            <AnimatedSection delay={0.12} className="pf-hero-brand">
+              <Image src="/logo max.png" alt="Omega CSA Engenharia" width={611} height={224} priority />
+              <p>Registro no CREA-RJ · Atuação no RJ e projetos aprovados em GO, MG e SP</p>
+            </AnimatedSection>
+          </div>
+
+          <AnimatedSection delay={0.2}>
+            <dl className="pf-stats">
+              {HERO_STATS.map((s) => (
+                <div key={s.label}>
+                  <dt>{s.label}</dt>
+                  <dd>{s.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ── ESPECIALIDADES ── */}
+      <section id="especialidades" className="pf-section pf-surface">
+        <div className="pf-container">
+          <SectionHead
+            eyebrow="Áreas de atuação"
+            title="11 especialidades integradas"
+            lead="Um loteamento, por exemplo, exige topografia, terraplenagem, drenagem, redes de água e esgoto, pavimentação, estruturas e licenciamento. Essas disciplinas são desenvolvidas internamente e entregues como um conjunto compatibilizado."
+          />
+          <AnimatedSection delay={0.1}>
+            <ul className="pf-spec">
+              {SPECIALTIES.map((s) => (
+                <li key={s.n}>
+                  <Link href={`/areas-de-atuacao/${s.slug}`} className="pf-spec-cell">
+                    <span className="pf-num">{s.n}</span>
+                    <strong>{s.title}</strong>
+                    <span>{s.desc}</span>
+                    <ArrowUpRight size={14} aria-hidden className="pf-spec-arrow" />
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link href="/contato" className="pf-spec-cell pf-spec-cta">
+                  <span className="pf-num">→</span>
+                  <strong>Escopo específico?</strong>
+                  <span>Envie a demanda para definição da equipe e do escopo.</span>
+                </Link>
+              </li>
+            </ul>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ── LINHAS DE SERVIÇO ── */}
+      <section id="linhas-de-servico" className="pf-section">
+        <div className="pf-container">
+          <SectionHead
+            eyebrow="Linhas de serviço"
+            title="O que a Omega executa"
+            lead="Projetos básicos e executivos, com dimensionamento, orçamento e acompanhamento do licenciamento ambiental quando aplicável."
+          />
+          <AnimatedSection delay={0.1} className="pf-grid-2 pf-grid-2--top">
+            {SERVICE_LINES.map((column, ci) => (
+              <div key={ci} className="pf-accordion">
+                {column.map((line, li) => (
+                  <details key={line.title} name="linhas-de-servico" open={ci === 0 && li === 0}>
+                    <summary>
+                      <span>
+                        <strong>{line.title}</strong>
+                        <span>{line.summary}</span>
+                      </span>
+                      <Plus size={16} aria-hidden className="pf-acc-plus" />
+                      <Minus size={16} aria-hidden className="pf-acc-minus" />
+                    </summary>
+                    <ul className="pf-bullets">
+                      {line.items.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </details>
+                ))}
+              </div>
+            ))}
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ── ATERROS SANITÁRIOS ── */}
+      <section id="aterros-sanitarios" className="pf-section pf-surface">
+        <div className="pf-container">
+          <SectionHead
+            eyebrow="Resíduos sólidos · Estado do Rio de Janeiro"
+            title="Consultoria em aterros sanitários controlados"
+            lead="Suporte técnico em todas as fases do aterro: viabilidade, licenciamento, implantação, operação, monitoramento e encerramento. Atendimento em todo o Estado do Rio de Janeiro, com engenheiros civis, sanitaristas, ambientais, químicos, cartógrafos e mecânicos, além de geólogos e especialistas em geotecnia e hidrogeologia."
+          />
+          <div className="pf-grid-3">
+            {LANDFILL_SERVICES.map((s, i) => (
+              <AnimatedSection key={s.title} delay={(i % 3) * 0.06}>
+                <article className={`pf-card pf-service ${s.standard ? "pf-service--standard" : ""}`}>
+                  <span className="pf-micro pf-micro--accent">{s.eyebrow}</span>
+                  <h3>{s.title}</h3>
+                  <ul className="pf-bullets">
+                    {s.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </article>
+              </AnimatedSection>
             ))}
           </div>
-        </AnimatedSection>
-      </section>
-
-      {/* Projects grid */}
-      <section style={{ padding: "0 clamp(16px, 4vw, 24px) clamp(56px, 8vw, 80px)", maxWidth: "1200px", margin: "0 auto" }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(min(280px, 100%), 1fr))",
-            gap: "20px",
-          }}
-        >
-          {projects.map((project, i) => (
-            <AnimatedSection key={project.id} delay={(i % 3) * 0.08}>
-              <div
-                style={{
-                  borderRadius: "16px",
-                  background: "#0d1526",
-                  border: project.highlight
-                    ? "1px solid rgba(26, 127, 193, 0.4)"
-                    : "1px solid #1a2d4a",
-                  overflow: "hidden",
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  boxShadow: project.highlight
-                    ? "0 0 0 1px rgba(26, 127, 193, 0.1), 0 8px 32px rgba(26, 127, 193, 0.1)"
-                    : "none",
-                }}
-              >
-                {/* Project photo */}
-                <div
-                  style={{
-                    height: "clamp(160px, 28vw, 200px)",
-                    background: "#0a1628",
-                    borderBottom: "1px solid #1a2d4a",
-                    position: "relative",
-                    overflow: "hidden",
-                  }}
-                >
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 380px"
-                    style={{ objectFit: "cover" }}
-                  />
-                  {/* Bottom scrim — integra a foto com o card dark */}
-                  <div
-                    aria-hidden
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      background:
-                        "linear-gradient(180deg, rgba(8,14,26,0) 55%, rgba(13,21,38,0.55) 100%)",
-                      pointerEvents: "none",
-                    }}
-                  />
-                  {project.highlight && (
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: "12px",
-                        right: "12px",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "6px",
-                        padding: "5px 11px",
-                        borderRadius: "100px",
-                        background: "rgba(8, 14, 26, 0.75)",
-                        backdropFilter: "blur(8px)",
-                        border: "1px solid rgba(26, 127, 193, 0.45)",
-                        boxShadow: "0 2px 12px rgba(0,0,0,0.3)",
-                      }}
-                    >
-                      <Award size={11} style={{ color: "#3d9fd8" }} />
-                      <span
-                        style={{
-                          fontFamily: "var(--font-code)",
-                          fontSize: "10px",
-                          fontWeight: "500",
-                          color: "#3d9fd8",
-                          letterSpacing: "0.08em",
-                          textTransform: "uppercase",
-                        }}
-                      >
-                        {project.highlight.label}
-                      </span>
-                    </div>
-                  )}
-                </div>
-
-                <div
-                  style={{
-                    padding: "24px",
-                    flex: 1,
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "10px",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "var(--font-code)",
-                      fontSize: "10px",
-                      fontWeight: "500",
-                      color: "#1a7fc1",
-                      letterSpacing: "0.12em",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    {project.category}
-                  </span>
-                  <h3
-                    className="display-heading"
-                    style={{
-                      fontSize: "17px",
-                      fontWeight: "700",
-                      color: "#e8edf5",
-                      letterSpacing: "-0.02em",
-                      lineHeight: "1.3",
-                    }}
-                  >
-                    {project.title}
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: "13px",
-                      color: "#6b7d96",
-                      lineHeight: "1.65",
-                      flex: 1,
-                    }}
-                  >
-                    {project.description}
-                  </p>
-
-                  {/* Highlight details (ART, sistema, etc.) */}
-                  {project.highlight && (
-                    <div
-                      style={{
-                        marginTop: "8px",
-                        padding: "14px 16px",
-                        borderRadius: "10px",
-                        background: "rgba(26, 127, 193, 0.06)",
-                        border: "1px solid rgba(26, 127, 193, 0.15)",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "6px",
-                      }}
-                    >
-                      {project.highlight.details.map((d) => (
-                        <div
-                          key={d.key}
-                          style={{ display: "flex", justifyContent: "space-between", gap: "12px" }}
-                        >
-                          <span
-                            style={{
-                              fontFamily: "var(--font-code)",
-                              fontSize: "10px",
-                              color: "#3d5070",
-                              letterSpacing: "0.08em",
-                              textTransform: "uppercase",
-                            }}
-                          >
-                            {d.key}
-                          </span>
-                          <span
-                            style={{
-                              fontFamily: "var(--font-code)",
-                              fontSize: "11px",
-                              color: "#8a9ab0",
-                              fontWeight: "500",
-                            }}
-                          >
-                            {d.value}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </AnimatedSection>
-          ))}
+          <AnimatedSection delay={0.1} className="pf-grid-4 pf-gap-top">
+            {LANDFILL_PHOTOS.map((p) => (
+              <PhotoCard key={p.src} photo={p} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 285px" />
+            ))}
+          </AnimatedSection>
         </div>
+      </section>
 
-        {/* Disclaimer */}
-        <AnimatedSection delay={0.3} style={{ marginTop: "40px" }}>
-          <div
-            style={{
-              padding: "16px 20px",
-              borderRadius: "10px",
-              background: "rgba(26, 127, 193, 0.04)",
-              border: "1px solid rgba(26, 127, 193, 0.1)",
-              fontSize: "12px",
-              color: "#3d5070",
-              fontFamily: "var(--font-code)",
-              letterSpacing: "0.04em",
-              lineHeight: "1.6",
-            }}
-          >
-            As informações deste portfólio são de propriedade da Omega Engenharia CSA Ltda. Possuímos atestados de capacidade técnica e referências comerciais de todos os serviços listados — disponíveis mediante solicitação.
+      {/* ── OBRAS ── */}
+      <section id="obras" className="pf-section">
+        <div className="pf-container">
+          <SectionHead
+            eyebrow="Registro fotográfico"
+            title="Obras e intervenções acompanhadas"
+            lead="Urbanização, unidades escolares, saneamento, estradas rurais, pavimentação e drenagem contra alagamentos e cheias."
+          />
+          <div className="pf-gallery">
+            {WORK_PHOTOS.map((p, i) => (
+              <AnimatedSection key={p.src} delay={(i % 3) * 0.06} className={p.span ? `pf-span-${p.span}` : undefined}>
+                <PhotoCard
+                  photo={p}
+                  badge={p.stage}
+                  sizes={p.span === "wide" ? "(max-width: 640px) 100vw, 792px" : "(max-width: 640px) 100vw, 390px"}
+                />
+              </AnimatedSection>
+            ))}
           </div>
-        </AnimatedSection>
+        </div>
       </section>
 
-      {/* CTA */}
-      <section
-        style={{
-          padding: "80px 24px",
-          background: "#0d1526",
-          borderTop: "1px solid #1a2d4a",
-          textAlign: "center",
-        }}
-      >
-        <AnimatedSection>
-          <h2
-            className="display-heading"
-            style={{
-              fontSize: "var(--text-2xl)",
-              fontWeight: "700",
-              color: "#e8edf5",
-              letterSpacing: "-0.04em",
-              marginBottom: "16px",
-            }}
-          >
-            Seu projeto pode ser o próximo.
-          </h2>
-          <p style={{ fontSize: "16px", color: "#6b7d96", marginBottom: "36px" }}>
-            Entre em contato e veja como podemos ajudar.
-          </p>
-          <Link
-            href="/contato"
-            className="btn-ghost-hover"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              padding: "14px 28px",
-              borderRadius: "10px",
-              fontSize: "15px",
-              fontWeight: "700",
-              textDecoration: "none",
-              background: "linear-gradient(135deg, #1a7fc1 0%, #0d5a8a 100%)",
-              color: "#fff",
-              boxShadow: "0 8px 32px rgba(26, 127, 193, 0.25)",
-            }}
-          >
-            Fale conosco <ArrowRight size={16} />
-          </Link>
-        </AnimatedSection>
+      {/* ── PROJETO EM DESTAQUE ── */}
+      <section className="pf-section pf-surface">
+        <div className="pf-container pf-grid-2 pf-grid-2--feature">
+          <AnimatedSection>
+            <Eyebrow>Projeto em destaque</Eyebrow>
+            <h2 className="display-heading pf-h2">{FEATURED_PROJECT.title}</h2>
+            <p className="pf-lead">{FEATURED_PROJECT.lead}</p>
+            <dl className="pf-sheet">
+              {FEATURED_PROJECT.sheet.map((row) => (
+                <div key={row.key}>
+                  <dt>{row.key}</dt>
+                  <dd>{row.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </AnimatedSection>
+          <AnimatedSection delay={0.12} className="pf-stack">
+            {FEATURED_PROJECT.images.map((p) => (
+              <PhotoCard key={p.src} photo={p} sizes="(max-width: 900px) 100vw, 575px" className="pf-photo--render" />
+            ))}
+          </AnimatedSection>
+        </div>
       </section>
-    </>
+
+      {/* ── EQUIPE ── */}
+      <section id="equipe-tecnica" className="pf-section pf-deep">
+        <Watermark />
+        <div className="pf-container">
+          <SectionHead
+            eyebrow="Equipe técnica"
+            title="Equipe dimensionada conforme o serviço"
+            lead="A empresa mobiliza mais de 10 profissionais diretos e indiretos. A composição é definida pelo escopo: projetos de saneamento envolvem engenharia sanitária, civil e hidrossanitária; aterros sanitários incluem geologia, geotecnia e hidrogeologia; perícias reúnem as especialidades relacionadas ao objeto do laudo."
+          />
+          <div className="pf-team">
+            <AnimatedSection className="pf-card pf-card--pad">
+              <span className="pf-tag pf-tag--blue">{TEAM.lead.role}</span>
+              <h3 className="pf-person">{TEAM.lead.name}</h3>
+              <p className="pf-registry">{TEAM.lead.registry}</p>
+              <Chips items={TEAM.lead.titles} />
+              <Chips items={TEAM.lead.academic} tone="green" />
+              <hr className="pf-rule" />
+              <h3 className="pf-person pf-person--sm">{TEAM.director.name}</h3>
+              <p className="pf-role">{TEAM.director.role}</p>
+            </AnimatedSection>
+            <div className="pf-stack">
+              <AnimatedSection delay={0.08} className="pf-card pf-card--pad">
+                <p className="pf-headcount">{TEAM.headcount}</p>
+                <p className="pf-role">profissionais diretos e indiretos</p>
+                <p className="pf-micro pf-gap-top-sm">Formações mobilizadas</p>
+                <Chips items={TEAM.disciplines} />
+              </AnimatedSection>
+              <AnimatedSection delay={0.14} className="pf-card pf-card--pad">
+                <p className="pf-micro">Sede</p>
+                <p className="pf-hq">{TEAM.headquarters}</p>
+                <p className="pf-micro pf-gap-top-sm">Escritórios de apoio</p>
+                <Chips items={TEAM.supportOffices} tone="plain" />
+              </AnimatedSection>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── ÓRGÃOS E INSTITUIÇÕES (seção clara) ── */}
+      <section id="instituicoes" className="pf-section pf-light">
+        <div className="pf-container">
+          <SectionHead
+            eyebrow="Órgãos e instituições"
+            title="Órgãos públicos, concessionárias e empresas privadas"
+            lead="Instituições junto às quais a Omega obteve aprovações e licenças ou para as quais prestou serviços."
+          />
+          <AnimatedSection delay={0.08}>
+            <ul className="pf-logos">
+              {INSTITUTION_LOGOS.map((l) => (
+                <li key={l.name}>
+                  <div className="pf-logo-img">
+                    <Image src={l.src} alt={l.name} width={l.width} height={l.height} />
+                  </div>
+                  <p>
+                    <strong>{l.name}</strong> — {l.note}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </AnimatedSection>
+          <AnimatedSection delay={0.12}>
+            <ul className="pf-inst">
+              {INSTITUTIONS.map((i) => (
+                <li key={i.name} data-kind={i.kind}>
+                  <strong>{i.name}</strong>
+                  <span>{i.note}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="pf-fineprint">
+              As marcas exibidas pertencem aos respectivos titulares e indicam instituições com as quais houve aprovação,
+              licenciamento ou prestação de serviço.
+            </p>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ── CLIENTES ── */}
+      <section id="clientes" className="pf-section">
+        <div className="pf-container">
+          <SectionHead
+            eyebrow="Experiência comprovada"
+            title="Clientes e empreendimentos atendidos"
+            lead="Projetos de infraestrutura urbana, saneamento, terraplenagem, pavimentação e estudos hidrológicos desenvolvidos para incorporadoras, concessionárias e prefeituras, com aprovação em órgãos municipais, concessionárias e na Caixa Econômica Federal."
+          />
+          <AnimatedSection delay={0.08}>
+            <ClientsFilter
+              privateGroup={<ClientGroup label="Iniciativa privada" clients={privateClients} />}
+              publicGroup={<ClientGroup label="Órgãos públicos" clients={publicClients} />}
+            />
+            <p className="pf-muted-note">Entre outros órgãos e municípios atendidos.</p>
+            <p className="pf-fineprint pf-fineprint--dark">
+              Perfis atendidos: órgãos municipais, estaduais e federais, construtoras e incorporadoras, concessionárias,
+              condomínios, indústrias, escritórios de advocacia e seguradoras. Atestados de capacidade técnica e CAT
+              disponíveis mediante solicitação.
+            </p>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ── INSTITUCIONAL ── */}
+      <section className="pf-section pf-surface">
+        <div className="pf-container">
+          <SectionHead eyebrow="Institucional" title="Missão, gestão e diferenciais" />
+          <div className="pf-grid-3">
+            <AnimatedSection className="pf-card pf-card--pad">
+              <p className="pf-micro">Missão</p>
+              <p className="pf-body">{MISSION.mission}</p>
+            </AnimatedSection>
+            <AnimatedSection delay={0.06} className="pf-card pf-card--pad">
+              <p className="pf-micro">Sistema de gestão</p>
+              <ul className="pf-bullets pf-body">
+                {MISSION.management.map((m) => (
+                  <li key={m}>{m}</li>
+                ))}
+              </ul>
+            </AnimatedSection>
+            <AnimatedSection delay={0.12} className="pf-card pf-card--pad">
+              <p className="pf-micro">Valores</p>
+              <p className="pf-body">{MISSION.values}</p>
+            </AnimatedSection>
+          </div>
+          <AnimatedSection delay={0.1}>
+            <ul className="pf-diff">
+              {MISSION.differentiators.map((d) => (
+                <li key={d.title}>
+                  <strong>{d.title}</strong>
+                  <span>{d.desc}</span>
+                </li>
+              ))}
+            </ul>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ── CONTATO ── */}
+      <section className="pf-section pf-deep">
+        <Watermark />
+        <div className="pf-container pf-grid-2 pf-grid-2--contact">
+          <AnimatedSection>
+            <Eyebrow>Contato</Eyebrow>
+            <h2 className="display-heading pf-h2">Envie o escopo do seu empreendimento</h2>
+            <p className="pf-lead">
+              Com a descrição da demanda, a área, a localização e o órgão de aprovação, a Omega define a equipe e
+              apresenta a proposta técnica.
+            </p>
+            <div className="pf-actions">
+              <Link href="/contato" className="pf-btn pf-btn--primary">
+                Solicitar orçamento <ArrowRight size={16} aria-hidden />
+              </Link>
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pf-btn pf-btn--ghost"
+              >
+                WhatsApp
+              </a>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection delay={0.1}>
+            <dl className="pf-sheet pf-sheet--contact">
+              <div>
+                <dt>Endereço</dt>
+                <dd>
+                  {SITE.address.street.replace("Edifício", "Ed.")} — {SITE.address.neighborhood},{" "}
+                  {SITE.address.city}/{SITE.address.state} — CEP {SITE.address.cep}
+                </dd>
+              </div>
+              <div>
+                <dt>Telefones</dt>
+                <dd>
+                  <a href={`tel:${SITE.phoneTel}`}>{SITE.phone}</a> ·{" "}
+                  <a href={`tel:${SITE.phoneAltTel}`}>{SITE.phoneAlt}</a>
+                </dd>
+              </div>
+              <div>
+                <dt>E-mail</dt>
+                <dd>
+                  <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+                  <br />
+                  <a href={`mailto:${SITE.emailAlt}`}>{SITE.emailAlt}</a>
+                </dd>
+              </div>
+              <div>
+                <dt>Apoio</dt>
+                <dd>{SITE.supportOffices.join(" · ")}</dd>
+              </div>
+            </dl>
+          </AnimatedSection>
+        </div>
+      </section>
+    </div>
   );
 }

@@ -10,7 +10,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
-import { SERVICES, SITE } from "@/lib/site-data";
+import { SERVICES, WHATSAPP_URL } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "Serviços Técnicos",
@@ -311,7 +311,7 @@ export default function ServicosTecnicosPage() {
               Solicitar orçamento <ArrowRight size={16} />
             </Link>
             <a
-              href={`https://wa.me/${SITE.social.whatsapp}`}
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
               style={{

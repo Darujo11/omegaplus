@@ -4,7 +4,7 @@ import { MapPin, Phone, Mail, MessageSquare, Building2, ExternalLink } from "luc
 import AnimatedSection from "@/components/AnimatedSection";
 import GoogleMapEmbed from "@/components/GoogleMapEmbed";
 import ContactForm from "./ContactForm";
-import { SITE } from "@/lib/site-data";
+import { SITE, WHATSAPP_URL } from "@/lib/site-data";
 
 const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SITE.address.mapsQuery)}`;
 
@@ -43,7 +43,7 @@ const contactInfo = [
     icon: <MessageSquare size={18} />,
     label: "WhatsApp",
     value: SITE.phone,
-    href: `https://wa.me/${SITE.social.whatsapp}`,
+    href: WHATSAPP_URL,
   },
   {
     icon: <MapPin size={18} />,

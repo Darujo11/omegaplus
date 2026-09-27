@@ -8,7 +8,7 @@ import AreasSection from "@/components/AreasSection";
 import GoogleMapEmbed from "@/components/GoogleMapEmbed";
 import PortfolioPreviewSection from "@/components/PortfolioPreviewSection";
 import HeroAreaNav from "@/components/HeroAreaNav";
-import { SITE, AREAS } from "@/lib/site-data";
+import { SITE, AREAS, WHATSAPP_URL } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "Omega CSA Engenharia — Campos dos Goytacazes, RJ",
@@ -646,7 +646,7 @@ export default function HomePage() {
                 Solicitar Orçamento <ArrowRight size={16} />
               </Link>
               <a
-                href={`https://wa.me/${SITE.social.whatsapp}`}
+                href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="cta-secondary-btn"

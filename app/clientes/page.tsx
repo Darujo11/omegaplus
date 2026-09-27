@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Building, FileCheck, Award, ArrowRight } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
-import { SITE } from "@/lib/site-data";
+import { WHATSAPP_URL } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "Clientes e Atestados",
@@ -387,7 +387,7 @@ export default function ClientesPage() {
               Fale conosco <ArrowRight size={16} />
             </Link>
             <a
-              href={`https://wa.me/${SITE.social.whatsapp}`}
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
               style={{

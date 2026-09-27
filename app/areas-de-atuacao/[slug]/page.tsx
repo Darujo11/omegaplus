@@ -19,7 +19,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
-import { AREAS, SITE } from "@/lib/site-data";
+import { AREAS, WHATSAPP_URL } from "@/lib/site-data";
 import { areaJsonLd, breadcrumbJsonLd } from "@/lib/structured-data";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -323,7 +323,7 @@ export default async function AreaDetalhe({ params }: Props) {
                 Solicitar orçamento <ArrowRight size={15} />
               </Link>
               <a
-                href={`https://wa.me/${SITE.social.whatsapp}`}
+                href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect, useLayoutEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { NAV_LINKS, SITE } from "@/lib/site-data";
+import { NAV_LINKS, WHATSAPP_URL } from "@/lib/site-data";
 
 export default function Header() {
   const pathname = usePathname();
@@ -116,7 +116,7 @@ export default function Header() {
 
           {/* CTA Desktop */}
           <motion.a
-            href={`https://wa.me/${SITE.social.whatsapp}`}
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="cta-desktop"
@@ -250,7 +250,7 @@ export default function Header() {
 
                 {/* WhatsApp CTA */}
                 <motion.a
-                  href={`https://wa.me/${SITE.social.whatsapp}`}
+                  href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   initial={{ opacity: 0, y: 6 }}
