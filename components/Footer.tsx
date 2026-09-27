@@ -5,6 +5,21 @@ import Image from "next/image";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { SITE, NAV_LINKS } from "@/lib/site-data";
 
+/**
+ * E-mail com ponto de quebra depois do "@". Sem ele, o endereço é uma palavra
+ * só e estoura a coluna do rodapé em tablets (768–820px). <wbr> não entra no
+ * texto copiado — diferente de um zero-width space, que corromperia o endereço.
+ */
+function EmailText({ email }: { email: string }) {
+  const [local, domain] = email.split("@");
+  return (
+    <span>
+      {local}@<wbr />
+      {domain}
+    </span>
+  );
+}
+
 export default function Footer() {
   return (
     <footer
@@ -126,10 +141,11 @@ export default function Footer() {
                   fontSize: "14px",
                   color: "#6b7d96",
                   textDecoration: "none",
+                  overflowWrap: "anywhere",
                 }}
               >
                 <Mail size={14} style={{ marginTop: "2px", flexShrink: 0, color: "#1a7fc1" }} />
-                {SITE.email}
+                <EmailText email={SITE.email} />
               </a>
               <a
                 href={`mailto:${SITE.emailAlt}`}
@@ -140,10 +156,11 @@ export default function Footer() {
                   fontSize: "14px",
                   color: "#6b7d96",
                   textDecoration: "none",
+                  overflowWrap: "anywhere",
                 }}
               >
                 <Mail size={14} style={{ marginTop: "2px", flexShrink: 0, color: "#1a7fc1" }} />
-                {SITE.emailAlt}
+                <EmailText email={SITE.emailAlt} />
               </a>
               <div
                 style={{ display: "flex", alignItems: "flex-start", gap: "10px", fontSize: "14px", color: "#6b7d96" }}

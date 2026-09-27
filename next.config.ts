@@ -9,6 +9,19 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        source: "/:path*",
+        headers: [
+          // 1 ano, sem includeSubDomains/preload: subdomínios podem ter serviços
+          // fora deste servidor, e preload é difícil de desfazer.
+          { key: "Strict-Transport-Security", value: "max-age=31536000" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          // O site embute o Google Maps, mas nunca é embutido por terceiros.
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), payment=(), usb=()" },
+        ],
+      },
+      {
         // Mídia estática com nome estável (fotos, logos, ícones): 1 dia fresca,
         // revalidada em segundo plano por mais 7. Trocar o arquivo aparece em até 1 dia.
         source: "/:path*.:ext(png|jpg|jpeg|webp|avif|svg|ico|mp4|webm)",

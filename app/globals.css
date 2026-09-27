@@ -687,7 +687,9 @@ section {
   position: relative;
 }
 
-/* Header — visibilidade mobile/desktop (inline styles não podem conflitar) */
+/* Header — visibilidade mobile/desktop (inline styles não podem conflitar).
+   Menu completo só a partir de 1024px: ele precisa de ~890px, e entre 768 e
+   ~890px (iPad em pé) o header estourava a largura da tela. */
 .nav-desktop {
   display: none;
 }
@@ -700,7 +702,7 @@ section {
   display: flex;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .nav-desktop {
     display: flex;
     align-items: center;
