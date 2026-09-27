@@ -12,6 +12,8 @@ export const organizationJsonLd = {
   "@id": ORGANIZATION_ID,
   name: SITE.name,
   alternateName: SITE.shortName,
+  legalName: SITE.legalName,
+  taxID: SITE.cnpj,
   description: SITE.description,
   url: SITE.url,
   logo: `${SITE.url}/favicon/web-app-manifest-512x512.png`,

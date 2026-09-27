@@ -171,7 +171,11 @@ export default function Footer() {
             © {new Date().getFullYear()} Omega CSA Engenharia. Todos os direitos reservados.
           </p>
           <p style={{ fontSize: "13px", color: "#3d5070" }}>
-            CREA-RJ · Campos dos Goytacazes, RJ
+            {SITE.legalName} ·{" "}
+            <span style={{ whiteSpace: "nowrap" }}>
+              CNPJ <span className="stat-value" style={{ fontWeight: 500 }}>{SITE.cnpj}</span>
+            </span>{" "}
+            · CREA-RJ · Campos dos Goytacazes, RJ
           </p>
         </div>
       </div>

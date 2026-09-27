@@ -1,6 +1,8 @@
 export const SITE = {
   name: "Omega CSA Engenharia",
   shortName: "Omega CSA",
+  legalName: "OMEGA ENGENHARIA CSA LTDA - EPP",
+  cnpj: "19.954.004/0001-37",
   url: "https://omegacsa.com.br",
   tagline: "Soluções integradas em engenharia para obras públicas, privadas, industriais e ambientais.",
   description:
