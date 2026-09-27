@@ -174,3 +174,50 @@ Não é o código. **O VPS fica em Boston (EUA)**: Hostinger, AS47583. Cada requ
 - Sem HSTS, `X-Content-Type-Options` e `Referrer-Policy`.
 - Sem política de privacidade (LGPD) e sem horário de atendimento.
 - A troca da webfont (IBM Plex, 4 arquivos pré-carregados) ainda é o que resta no LCP simulado.
+
+---
+
+## Leva 2 — 2026-09-27, deploy `155b561` (publicado pelo webhook às 21:51)
+
+### Resolvido
+
+| Item | Antes | Agora |
+|---|---|---|
+| Títulos das 11 páginas de área | até 75 caracteres, sem cidade | 44 a 59 caracteres, formato "palavra-chave em Campos-RJ \| Omega CSA" (campo `seoTitle` em `lib/site-data.ts`). O H1 de cada página mantém o nome completo da área |
+| Descrições das áreas | 124 a 137 caracteres, sufixo repetido | 135 a 150 caracteres, terminando com "Em Campos dos Goytacazes e todo o RJ. Orçamento pelo WhatsApp." |
+| Descrição de `/portfolio` | 237 (cortada no Google) | 147 |
+| Descrição de `/sobre` | 172 | 152 |
+| Descrição de `/contato` | 106 | 133, com o WhatsApp |
+| Título de `/sobre` | "A Empresa \| Omega CSA Engenharia" (32) | "Sobre a Omega CSA Engenharia — Campos dos Goytacazes, RJ" (56) |
+| Título de `/contato` | "Contato \| Omega CSA Engenharia" (30) | "Contato e Orçamento \| Omega CSA Engenharia" (42) |
+| H1 da home | "Áreas de atuação em engenharia" | "Engenharia multidisciplinar em Campos dos Goytacazes" |
+| `www.omegacsa.com.br` | 200 (conteúdo duplicado) | **301** → `omegacsa.com.br`, preservando caminho e query |
+| `omega.autozapx.com` e `omegacsa.autozapx.com` | 200 (conteúdo duplicado) | **301** → `omegacsa.com.br` |
+| Cabeçalhos de segurança | nenhum | `Strict-Transport-Security: max-age=31536000`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `X-Frame-Options: SAMEORIGIN`, `Permissions-Policy` |
+
+### Bug encontrado e corrigido no caminho
+
+Entre **768 e ~890 px** (iPad em pé), o site **estourava a largura da tela em produção**:
+- o menu completo aparecia a partir de 768 px mas precisava de ~890 px, cortando o logo e o botão do WhatsApp;
+- o e-mail `omegaengenharia.csa@gmail.com` no rodapé estourava a coluna.
+
+Correção: o menu completo passou a aparecer só a partir de 1024 px (hambúrguer abaixo disso), e o e-mail quebra depois do @ com `<wbr>`, que não entra no texto copiado. Verificação: 8 páginas × 11 larguras (320 a 1440 px), sem nenhum estouro horizontal; o hambúrguer abre, navega e libera a rolagem entre 768 e 1023 px.
+
+### Detalhes técnicos
+
+- Os redirecionamentos 301 ficam no Traefik (`infra/vps/stack.yml`), com um router por host e o middleware `redirectregex`. O certificado existente já cobria os quatro domínios, então não houve nova emissão. `http://www` faz dois saltos (redirecionamento global de HTTP para HTTPS e depois o 301 para o domínio canônico), o que é aceitável.
+- HSTS sem `includeSubDomains` nem `preload`, de propósito: subdomínios podem hospedar serviços fora deste servidor, e o preload é difícil de desfazer.
+- Mudanças em `infra/vps/` **não** são aplicadas pelo push: é preciso rodar `instalar.sh` no servidor. Os arquivos de operação ficam fixos lá por segurança; se fossem lidos do repositório, quem tivesse permissão de push ganharia root no host.
+
+### Continua em aberto
+
+| Prioridade | Item | Depende de |
+|---|---|---|
+| Alta | Aprofundar as 11 páginas de área (400 a 700 palavras de conteúdo próprio: escopo, normas, projeto real, perguntas frequentes) | Informação da equipe técnica |
+| Alta | Política de privacidade (LGPD: o formulário coleta dados pessoais) | Texto jurídico / aprovação da empresa |
+| Alta | Google Business Profile, Search Console, Bing Places | Acesso da empresa |
+| Média | Horário de atendimento, coordenadas e perfis sociais no site e no schema | Dados da empresa |
+| Média | Latência do VPS em Boston (~0,4 s até o primeiro byte por requisição): CDN com PoP no Brasil ou VPS no Brasil | Decisão de infraestrutura |
+| Baixa | `lastmod` real no sitemap (hoje é o horário do build) | Código |
+| Baixa | Open Graph específico por página (hoje todas compartilham o título e a descrição do layout) | Código |
+| Baixa | Troca da webfont no LCP simulado (`display: optional` na fonte de títulos) | Decisão de design |

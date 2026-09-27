@@ -124,3 +124,33 @@ Os dois arquivos de referência da skill (`local-seo-signals.md` e `local-schema
 > (22) 99964-4607
 
 O score só sobe de verdade com os itens que dependem da empresa: ficha no Google Business Profile, avaliações, horário, coordenadas e perfis sociais (`sameAs`). O código está pronto para receber esses dados em `lib/site-data.ts` e `lib/structured-data.ts`.
+
+---
+
+## Leva 2 — 2026-09-27, deploy `155b561`
+
+### Local SEO Score: 46/100 (+2)
+
+| Dimensão | Leva 1 | Agora | O que mudou |
+|---|---|---|---|
+| SEO on-page local | 13 | **15** | cidade no `<title>` das 11 páginas de área ("… em Campos-RJ") e H1 da home com a cidade ("Engenharia multidisciplinar em Campos dos Goytacazes"); descrições das áreas citam Campos dos Goytacazes e o RJ |
+| Demais dimensões | — | — | sem mudança |
+
+Os redirecionamentos 301 de `www` e dos domínios `autozapx.com` consolidam os sinais num único domínio: citações e links antigos que apontam para eles passam a somar para `omegacsa.com.br`.
+
+### Status das 10 ações priorizadas
+
+| # | Ação | Status |
+|---|---|---|
+| 1 | Google Business Profile | ⏳ depende da empresa |
+| 2 | Estratégia de avaliações | ⏳ depende da empresa |
+| 3 | Bing Places | ⏳ depende da empresa (depois do GBP) |
+| 4 | Schema: `geo`, horário, `sameAs`, `hasMap`, `taxID` | ◐ `taxID` + `legalName` feitos; o resto aguarda dados reais |
+| 5 | Horário e CNPJ visíveis no rodapé | ◐ CNPJ e razão social feitos; horário aguarda a empresa |
+| 6 | Aprofundar as 11 páginas de área | ⏳ depende do conteúdo técnico |
+| 7 | Mapa da ficha GBP (place ID) + link de avaliações | ⏳ depende do GBP |
+| 8 | Cidade no H1 da home e nos títulos das áreas | ✅ feito |
+| 9 | Apple Business Connect, LinkedIn, Instagram | ⏳ depende da empresa |
+| 10 | Autoridade local (ACIC, CREA-RJ, imprensa) | ⏳ depende da empresa |
+
+**O que falta receber da Omega para destravar os itens 1, 4, 5 e 7:** horário de atendimento, link da ficha no Google (ou autorização para criá-la), perfis de LinkedIn e Instagram, e a confirmação do pin do escritório no mapa (para as coordenadas).
